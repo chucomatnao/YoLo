@@ -16,7 +16,11 @@ videos/processed: Video đã nhận diện.
 
 
 
-Cấu trúc thư mục và giải thích file
+Cấu trúc thư mục và giải thích file:
+
+dowload foder yolo-coco : https://drive.google.com/file/d/1LNDWyLvxS9UFB_p88Y4Z24k1t4JjLNKU/view?usp=sharing
+
+
 yolo_web_app/
 ├── app.py                    # File chính, chạy ứng dụng Flask, xử lý route và logic
 ├── yolo.py                   # Hàm xử lý nhận diện ảnh bằng YOLO
@@ -49,7 +53,12 @@ yolo_web_app/
 │   └── yolov3.weights        # File mô hình YOLO (không commit, cần tải riêng)
 └── venv/                     # Môi trường ảo Python (không commit)
 
-Mô tả chi tiết
+
+
+
+
+
+Mô tả chi tiết:
 
 app.py: Chứa logic Flask, quản lý route (/login, /dashboard, /camera, /history, /result), lưu file vào static/uploads, và lưu metadata vào metadata.json.
 yolo.py, yolo_video.py: Chứa hàm nhận diện đối tượng cho ảnh và video, sử dụng OpenCV và mô hình YOLO.
