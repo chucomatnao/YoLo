@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Đăng Ký{% endblock %}
+{% block content %}
+<div class="bg-white p-8 rounded-lg shadow-lg max-w-md mx-auto">
+    <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">Đăng Ký</h1>
+    <form method="POST" class="space-y-4">
+        <div>
+            <label for="username" class="block text-sm font-medium text-gray-700">Tên đăng nhập</label>
+            <input type="text" name="username" id="username" required
+                   class="mt-1 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+        <div>
+            <label for="password" class="block text-sm font-medium text-gray-700">Mật khẩu</label>
+            <input type="password" name="password" id="password" required
+                   class="mt-1 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+        <button type="submit"
+                class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-200">
+            Đăng Ký
+        </button>
+    </form>
+    <p class="mt-4 text-center text-sm text-gray-600">
+        Đã có tài khoản? <a href="{{ url_for('login') }}" class="text-blue-600 hover:underline">Đăng nhập</a>
+    </p>
+</div>
+{% endblock %}

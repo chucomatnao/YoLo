@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Kết Quả{% endblock %}
+{% block content %}
+<div class="bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto">
+    <div class="flex justify-end mb-4">
+        <a href="{{ url_for('dashboard') }}"
+           class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-200">
+            Quay lại Dashboard
+        </a>
+    </div>
+    <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">Kết Quả Xử Lý</h1>
+    <!-- Hiển thị ảnh hoặc video trong khung cố định -->
+    <div class="result mb-6 flex justify-center">
+        <div class="media-frame">
+            {% if file_type == 'image' %}
+                <img src="{{ url_for('uploaded_file', file_type='image', filename=filename) }}" alt="Kết quả"
+                     class="media-content">
+            {% elif file_type == 'video' %}
+                <video controls class="media-content">
+                    <source src="{{ url_for('uploaded_file', file_type='video', filename=filename) }}" type="video/mp4">
+                    Trình duyệt không hỗ trợ video.
+                </video>
+            {% else %}
+                <p class="text-red-600">Định dạng file không được hỗ trợ: {{ filename }}</p>
+            {% endif %}
+        </div>
+    </div>
+    <!-- Hiển thị danh sách đối tượng -->
+    <div class="bg-gray-50 p-4 rounded-md shadow-sm">
+        <h2 class="text-lg font-semibold text-gray-700 mb-4">Các đối tượng được phát hiện (Tổng: {{ detections|length }})</h2>
+        {% if detections %}
+            <ul class="list-disc pl-5 space-y-2">
+                {% for detection in detections %}
+                    {% if detection.label and detection.confidence is defined %}
+                        <li class="text-gray-600">
+                            {{ detection.label }} (Độ tin cậy: {{ detection.confidence | float | round(4) }})
+                        </li>
+                    {% else %}
+                        <li class="text-red-600">
+                            Dữ liệu không hợp lệ: {{ detection }}
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="text-gray-600">Không phát hiện được đối tượng nào.</p>
+        {% endif %}
+        <!-- Debug -->
+        <p class="text-gray-500 text-sm mt-4">Debug detections: {{ detections }}</p>
+    </div>
+</div>
+{% endblock %}

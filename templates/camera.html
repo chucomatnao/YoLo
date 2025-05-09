@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block title %}Camera{% endblock %}
+{% block content %}
+<div class="max-w-2xl mx-auto">
+    <h1 class="text-2xl font-bold text-gray-800 mb-6">Sử dụng Camera</h1>
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+        <div class="camera-container">
+            <video id="cameraFeed" autoplay class="w-full max-w-[640px] rounded-md"></video>
+            <div class="flex space-x-4 mt-4">
+                <button id="capturePhoto"
+                        class="bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700">
+                    Chụp Ảnh
+                </button>
+                <button id="recordVideo"
+                        class="bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700">
+                    Ghi Video
+                </button>
+                <button id="stopVideo" class="hidden bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700">
+                    Dừng Ghi
+                </button>
+            </div>
+            <canvas id="photoCanvas" class="hidden"></canvas>
+        </div>
+    </div>
+</div>
+<script>
+    const video = document.getElementById('cameraFeed');
+    const canvas = document.getElementById('photoCanvas');
+    const captureBtn = document.getElementById('capturePhoto');
+    const recordBtn = document.getElementById('recordVideo');
+    const stopBtn = document.getElementById('stopVideo');
+    let mediaRecorder;
+    let recordedChunks = [];
+
+    // Truy cập camera
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
+        .then(stream => {
+            video.srcObject = stream;
+            video.play();
+        })
+        .catch(err => {
+            console.error('Camera error:', err);
+            alert('Không thể truy cập camera: ' + err.message);
+        });
+
+    // Chụp ảnh
+    captureBtn.addEventListener('click', () => {
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        canvas.getContext('2d').drawImage(video, 0, 0);
+        canvas.toBlob(blob => {
+            const formData = new FormData();
+            formData.append('file', blob, 'capture.jpg');
+            fetch('/camera', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = `/result/${data.filename}`;
+                } else {
+                    alert('Lỗi xử lý ảnh: ' + data.error);
+                }
+            })
+            .catch(err => alert('Lỗi gửi ảnh: ' + err));
+        }, 'image/jpeg', 0.9);
+    });
+
+    // Ghi video
+    recordBtn.addEventListener('click', () => {
+        recordedChunks = [];
+        mediaRecorder = new MediaRecorder(video.srcObject, { mimeType: 'video/webm' });
+        mediaRecorder.ondataavailable = e => {
+            if (e.data.size > 0) recordedChunks.push(e.data);
+        };
+        mediaRecorder.onstop = () => {
+            const blob = new Blob(recordedChunks, { type: 'video/mp4' });
+            const formData = new FormData();
+            formData.append('file', blob, 'recording.mp4');
+            fetch('/camera', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = `/result/${data.filename}`;
+                } else {
+                    alert('Lỗi xử lý video: ' + data.error);
+                }
+            })
+            .catch(err => alert('Lỗi gửi video: ' + err));
+        };
+        mediaRecorder.start(1000);
+        recordBtn.classList.add('hidden');
+        stopBtn.classList.remove('hidden');
+    });
+
+    // Dừng ghi
+    stopBtn.addEventListener('click', () => {
+        mediaRecorder.stop();
+        recordBtn.classList.remove('hidden');
+        stopBtn.classList.add('hidden');
+    });
+</script>
+{% endblock %}
