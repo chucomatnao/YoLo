@@ -2,7 +2,11 @@ import numpy as np
 import cv2
 import os
 
-def process_image(image_path, output_path, confidence=0.5, threshold=0.3):
+def get_output_layers(net):
+    layer_names = net.getLayerNames()
+    return [layer_names[i - 1] for i in net.getUnconnectedOutLayers()]
+
+def process_image(input_path, output_path, confidence=0.5, threshold=0.3):
     # Kiểm tra đường dẫn file YOLO
     labelsPath = os.path.sep.join(['yolo-coco', "coco.names"])
     weightsPath = os.path.sep.join(['yolo-coco', "yolov3.weights"])
@@ -23,19 +27,16 @@ def process_image(image_path, output_path, confidence=0.5, threshold=0.3):
     net = cv2.dnn.readNetFromDarknet(configPath, weightsPath)
 
     # Load image
-    image = cv2.imread(image_path)
+    image = cv2.imread(input_path)
     if image is None:
-        raise ValueError(f"Không thể đọc ảnh: {image_path}")
+        print(f"Error: Cannot read image {input_path}")
+        return []
     (H, W) = image.shape[:2]
-
-    # Get YOLO output layers
-    ln = net.getLayerNames()
-    ln = [ln[i - 1] for i in net.getUnconnectedOutLayers()]
 
     # Create blob and perform forward pass
     blob = cv2.dnn.blobFromImage(image, 1 / 255.0, (416, 416), swapRB=True, crop=False)
     net.setInput(blob)
-    layerOutputs = net.forward(ln)
+    layerOutputs = net.forward(get_output_layers(net))
 
     # Initialize lists
     boxes = []
@@ -73,10 +74,12 @@ def process_image(image_path, output_path, confidence=0.5, threshold=0.3):
             text = "{}: {:.4f}".format(LABELS[classIDs[i]], confidences[i])
             cv2.putText(image, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
             detections.append({"label": LABELS[classIDs[i]], "confidence": float(confidences[i])})
+            print(f"Image detected: {LABELS[classIDs[i]]}, Confidence: {confidences[i]}")
 
     # Save output image
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
     if not cv2.imwrite(output_path, image):
         raise ValueError(f"Không thể lưu ảnh đầu ra: {output_path}")
 
-    print(f"Image detections (count: {len(detections)}): {detections}")  # Debug
+    print(f"Image saved to {output_path}, detections (count: {len(detections)}): {detections}")
     return detections

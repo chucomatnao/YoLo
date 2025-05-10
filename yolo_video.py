@@ -2,6 +2,10 @@ import numpy as np
 import cv2
 import os
 
+def get_output_layers(net):
+    layer_names = net.getLayerNames()
+    return [layer_names[i - 1] for i in net.getUnconnectedOutLayers()]
+
 def process_video(input_path, output_path, confidence=0.2, threshold=0.1):
     # Kiểm tra đường dẫn file YOLO
     labelsPath = os.path.sep.join(['yolo-coco', "coco.names"])
@@ -22,10 +26,6 @@ def process_video(input_path, output_path, confidence=0.2, threshold=0.1):
     # Load YOLO
     net = cv2.dnn.readNetFromDarknet(configPath, weightsPath)
 
-    # Get YOLO output layers
-    ln = net.getLayerNames()
-    ln = [ln[i - 1] for i in net.getUnconnectedOutLayers()]
-
     # Initialize video stream
     vs = cv2.VideoCapture(input_path)
     if not vs.isOpened():
@@ -36,10 +36,13 @@ def process_video(input_path, output_path, confidence=0.2, threshold=0.1):
     width = int(vs.get(cv2.CAP_PROP_FRAME_WIDTH))
     height = int(vs.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
+    # Cố định kích thước đầu ra
+    output_width, output_height = 640, 480
+
     writer = None
     detections = []
 
-    print(f"Processing video: {input_path}, FPS: {fps}, Size: {width}x{height}")  # Debug
+    print(f"Processing video: {input_path}, FPS: {fps}, Input Size: {width}x{height}, Output Size: {output_width}x{output_height}")
 
     # Loop over frames
     frame_count = 0
@@ -52,7 +55,7 @@ def process_video(input_path, output_path, confidence=0.2, threshold=0.1):
         # Create blob and perform forward pass
         blob = cv2.dnn.blobFromImage(frame, 1 / 255.0, (608, 608), swapRB=True, crop=False)
         net.setInput(blob)
-        layerOutputs = net.forward(ln)
+        layerOutputs = net.forward(get_output_layers(net))
 
         # Initialize lists
         boxes = []
@@ -88,12 +91,16 @@ def process_video(input_path, output_path, confidence=0.2, threshold=0.1):
                 cv2.putText(frame, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
                 detection = {"label": LABELS[classIDs[i]], "confidence": float(confidences[i])}
                 detections.append(detection)
-                print(f"Frame {frame_count}: Added detection: {detection}")  # Debug
+                print(f"Frame {frame_count}: Added detection: {detection}")
+
+        # Resize frame to output size
+        frame = cv2.resize(frame, (output_width, output_height))
 
         # Initialize video writer
         if writer is None:
-            fourcc = cv2.VideoWriter_fourcc(*"H264")
-            writer = cv2.VideoWriter(output_path, fourcc, fps, (width, height))
+            fourcc = cv2.VideoWriter_fourcc(*"mp4v")
+            os.makedirs(os.path.dirname(output_path), exist_ok=True)
+            writer = cv2.VideoWriter(output_path, fourcc, fps, (output_width, output_height))
             if not writer.isOpened():
                 raise ValueError(f"Không thể tạo file video đầu ra: {output_path}")
 
@@ -104,16 +111,17 @@ def process_video(input_path, output_path, confidence=0.2, threshold=0.1):
     writer.release()
     vs.release()
 
-    print(f"Total frames processed: {frame_count}")  # Debug
-    print(f"Raw detections (count: {len(detections)}): {detections}")  # Debug
+    print(f"Total frames processed: {frame_count}")
+    print(f"Raw detections (count: {len(detections)}): {detections}")
 
-    # Loại bỏ trùng lặp đơn giản dựa trên nhãn
+    # Loại bỏ trùng lặp dựa trên label và confidence
     unique_detections = []
-    seen_labels = set()
+    seen = set()
     for d in detections:
-        if d["label"] not in seen_labels:
+        key = (d["label"], round(d["confidence"], 4))
+        if key not in seen:
             unique_detections.append(d)
-            seen_labels.add(d["label"])
+            seen.add(key)
 
-    print(f"Final unique detections (count: {len(unique_detections)}): {unique_detections}")  # Debug
+    print(f"Final unique detections (count: {len(unique_detections)}): {unique_detections}")
     return unique_detections

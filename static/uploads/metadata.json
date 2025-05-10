@@ -1,6 +1,16 @@
 {
     "output_images4.jpg": {
         "type": "image",
-        "timestamp": "2025-05-09 20:23:47"
+        "timestamp": "2025-05-10 16:08:15",
+        "detections": [
+            {
+                "label": "cat",
+                "confidence": 0.9743006825447083
+            },
+            {
+                "label": "dog",
+                "confidence": 0.9726794362068176
+            }
+        ]
     }
 }

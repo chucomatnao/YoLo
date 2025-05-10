@@ -50,17 +50,19 @@ def ensure_directories():
     os.makedirs(app.config['VIDEO_PROCESSED'], exist_ok=True)
 
 # Lưu metadata
-def save_metadata(filename, file_type):
+def save_metadata(filename, file_type, detections):
     metadata = {}
     if os.path.exists(app.config['METADATA_FILE']):
         with open(app.config['METADATA_FILE'], 'r') as f:
             metadata = json.load(f)
     metadata[filename] = {
         'type': file_type,
-        'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+        'detections': detections or []
     }
     with open(app.config['METADATA_FILE'], 'w') as f:
         json.dump(metadata, f, indent=4)
+    print(f"Metadata updated for {filename}: {metadata[filename]}")  # Debug
 
 @app.route('/')
 def index():
@@ -129,12 +131,13 @@ def dashboard():
                     detections = process_video(filepath, output_path)
                     if not os.path.exists(output_path) or os.path.getsize(output_path) == 0:
                         raise ValueError("File video đầu ra không được tạo hoặc bị hỏng")
-                print(f"Stored detections: {detections}")
-                session['detections'] = detections
+                print(f"Stored detections: {detections}")  # Debug
+                session['detections'] = detections or []
                 session['file_type'] = 'image' if is_image else 'video'
-                save_metadata(output_filename, session['file_type'])
+                save_metadata(output_filename, session['file_type'], detections)
                 return redirect(url_for('result', filename=output_filename))
             except Exception as e:
+                print(f"Error processing file: {str(e)}")  # Debug
                 flash(f'Lỗi khi xử lý file: {str(e)}', 'error')
                 return redirect(request.url)
         else:
@@ -168,11 +171,13 @@ def camera():
                     detections = process_video(filepath, output_path)
                     if not os.path.exists(output_path) or os.path.getsize(output_path) == 0:
                         raise ValueError("File video đầu ra không được tạo hoặc bị hỏng")
-                session['detections'] = detections
+                print(f"Stored detections: {detections}")  # Debug
+                session['detections'] = detections or []
                 session['file_type'] = 'image' if is_image else 'video'
-                save_metadata(output_filename, session['file_type'])
+                save_metadata(output_filename, session['file_type'], detections)
                 return jsonify({'success': True, 'filename': output_filename})
             except Exception as e:
+                print(f"Error processing file: {str(e)}")  # Debug
                 return jsonify({'success': False, 'error': str(e)}), 500
         else:
             return jsonify({'success': False, 'error': 'Định dạng file không được hỗ trợ'}), 400
@@ -182,33 +187,18 @@ def camera():
 @login_required
 def history():
     results = []
-    metadata = {}
     if os.path.exists(app.config['METADATA_FILE']):
         with open(app.config['METADATA_FILE'], 'r') as f:
             metadata = json.load(f)
-
-    # Lấy file từ images/processed
-    image_processed = app.config['IMAGE_PROCESSED']
-    for filename in os.listdir(image_processed):
-        if filename.startswith('output_'):
+        for filename, info in metadata.items():
             results.append({
                 'filename': filename,
-                'type': metadata.get(filename, {}).get('type', 'image'),
-                'timestamp': metadata.get(filename, {}).get('timestamp', 'N/A')
+                'type': info.get('type', 'unknown'),
+                'timestamp': info.get('timestamp', 'N/A'),
+                'detections': info.get('detections', [])
             })
-
-    # Lấy file từ videos/processed
-    video_processed = app.config['VIDEO_PROCESSED']
-    for filename in os.listdir(video_processed):
-        if filename.startswith('output_'):
-            results.append({
-                'filename': filename,
-                'type': metadata.get(filename, {}).get('type', 'video'),
-                'timestamp': metadata.get(filename, {}).get('timestamp', 'N/A')
-            })
-
-    # Sắp xếp theo thời gian (mới nhất trước)
-    results.sort(key=lambda x: x['timestamp'], reverse=True)
+    results.sort(key=lambda x: x.get('timestamp', ''), reverse=True)
+    print(f"History results: {results}")  # Debug
     return render_template('history.html', results=results)
 
 @app.route('/result/<filename>')
@@ -216,7 +206,7 @@ def history():
 def result(filename):
     detections = session.pop('detections', [])
     file_type = session.pop('file_type', 'image')
-    print(f"Retrieved detections: {detections}")
+    print(f"Retrieved detections: {detections}")  # Debug
     return render_template('result.html', filename=filename, detections=detections, file_type=file_type)
 
 @app.route('/uploads/<file_type>/<filename>')
