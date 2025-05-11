@@ -20,3 +20,15 @@ yolo-coco/*.cfg
 *.tar.gz
 *.raryolo-coco/yolov3.weights
 yolo-coco/yolov3.weights
+
+# File lớn
+yolov5s.pt
+static/uploads/*
+static/uploads/images/original/*
+static/uploads/images/processed/*
+static/uploads/videos/original/*
+static/uploads/videos/processed/*
+static/uploads/metadata.json
+
+# Thư mục YOLOv5 (không commit toàn bộ thư mục)
+yolov5/

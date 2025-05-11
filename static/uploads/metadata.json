@@ -12,5 +12,2507 @@
                 "confidence": 0.9726794362068176
             }
         ]
+    },
+    "output_342220620_881287282936301_2900494315526899378_n.jpg": {
+        "type": "image",
+        "timestamp": "2025-05-11 15:03:14",
+        "detections": [
+            {
+                "label": "person",
+                "confidence": 0.9986568093299866
+            },
+            {
+                "label": "person",
+                "confidence": 0.9938135147094727
+            },
+            {
+                "label": "person",
+                "confidence": 0.9908660650253296
+            },
+            {
+                "label": "person",
+                "confidence": 0.9542507529258728
+            },
+            {
+                "label": "person",
+                "confidence": 0.9215220212936401
+            },
+            {
+                "label": "person",
+                "confidence": 0.9070812463760376
+            },
+            {
+                "label": "person",
+                "confidence": 0.9053415656089783
+            },
+            {
+                "label": "person",
+                "confidence": 0.8815962672233582
+            },
+            {
+                "label": "chair",
+                "confidence": 0.8665490746498108
+            },
+            {
+                "label": "cell phone",
+                "confidence": 0.7082329392433167
+            },
+            {
+                "label": "chair",
+                "confidence": 0.5814054012298584
+            }
+        ]
+    },
+    "output_hd260aquan4-300x225.jpg": {
+        "type": "image",
+        "timestamp": "2025-05-11 15:20:50",
+        "detections": [
+            {
+                "label": "person",
+                "confidence": 0.999897837638855
+            },
+            {
+                "label": "person",
+                "confidence": 0.8779825568199158
+            },
+            {
+                "label": "sofa",
+                "confidence": 0.7991623878479004
+            },
+            {
+                "label": "bench",
+                "confidence": 0.6640282273292542
+            },
+            {
+                "label": "sofa",
+                "confidence": 0.6337720155715942
+            }
+        ]
+    },
+    "output_download.jpg": {
+        "type": "image",
+        "timestamp": "2025-05-11 15:28:35",
+        "detections": [
+            {
+                "label": "train",
+                "confidence": 0.999752938747406
+            }
+        ]
+    },
+    "output_capture.jpg": {
+        "type": "image",
+        "timestamp": "2025-05-11 18:45:47",
+        "detections": [
+            {
+                "label": "person",
+                "confidence": 0.678516685962677
+            }
+        ]
+    },
+    "output_capture.mp4": {
+        "type": "video",
+        "timestamp": "2025-05-11 18:53:25",
+        "detections": [
+            {
+                "label": "person",
+                "confidence": 0.9981029033660889
+            },
+            {
+                "label": "person",
+                "confidence": 0.9984756112098694
+            },
+            {
+                "label": "person",
+                "confidence": 0.9991794228553772
+            },
+            {
+                "label": "person",
+                "confidence": 0.9990953207015991
+            },
+            {
+                "label": "person",
+                "confidence": 0.9990028738975525
+            },
+            {
+                "label": "person",
+                "confidence": 0.9988664388656616
+            },
+            {
+                "label": "person",
+                "confidence": 0.9994513392448425
+            },
+            {
+                "label": "person",
+                "confidence": 0.9985558986663818
+            },
+            {
+                "label": "person",
+                "confidence": 0.9982150793075562
+            },
+            {
+                "label": "person",
+                "confidence": 0.9983882904052734
+            },
+            {
+                "label": "person",
+                "confidence": 0.9986661672592163
+            },
+            {
+                "label": "person",
+                "confidence": 0.9993330836296082
+            },
+            {
+                "label": "person",
+                "confidence": 0.9987620711326599
+            },
+            {
+                "label": "person",
+                "confidence": 0.9979754686355591
+            },
+            {
+                "label": "person",
+                "confidence": 0.9982969760894775
+            },
+            {
+                "label": "person",
+                "confidence": 0.9977582693099976
+            },
+            {
+                "label": "person",
+                "confidence": 0.9976765513420105
+            },
+            {
+                "label": "person",
+                "confidence": 0.9974943995475769
+            },
+            {
+                "label": "person",
+                "confidence": 0.9974064230918884
+            },
+            {
+                "label": "person",
+                "confidence": 0.995518147945404
+            },
+            {
+                "label": "person",
+                "confidence": 0.9961378574371338
+            },
+            {
+                "label": "person",
+                "confidence": 0.9973223209381104
+            },
+            {
+                "label": "person",
+                "confidence": 0.9979420900344849
+            },
+            {
+                "label": "person",
+                "confidence": 0.9972065091133118
+            },
+            {
+                "label": "person",
+                "confidence": 0.9975504875183105
+            },
+            {
+                "label": "person",
+                "confidence": 0.996444821357727
+            },
+            {
+                "label": "person",
+                "confidence": 0.996315062046051
+            },
+            {
+                "label": "person",
+                "confidence": 0.996824324131012
+            },
+            {
+                "label": "person",
+                "confidence": 0.9959526658058167
+            },
+            {
+                "label": "person",
+                "confidence": 0.996950089931488
+            },
+            {
+                "label": "person",
+                "confidence": 0.9931663274765015
+            },
+            {
+                "label": "person",
+                "confidence": 0.9968871474266052
+            },
+            {
+                "label": "person",
+                "confidence": 0.9950424432754517
+            },
+            {
+                "label": "person",
+                "confidence": 0.9965575337409973
+            },
+            {
+                "label": "person",
+                "confidence": 0.9925193190574646
+            },
+            {
+                "label": "tie",
+                "confidence": 0.753457248210907
+            },
+            {
+                "label": "person",
+                "confidence": 0.9914129972457886
+            },
+            {
+                "label": "tie",
+                "confidence": 0.6017088890075684
+            },
+            {
+                "label": "person",
+                "confidence": 0.99373459815979
+            },
+            {
+                "label": "bottle",
+                "confidence": 0.29645413160324097
+            },
+            {
+                "label": "person",
+                "confidence": 0.9953637719154358
+            },
+            {
+                "label": "cell phone",
+                "confidence": 0.6559839844703674
+            },
+            {
+                "label": "tie",
+                "confidence": 0.32416820526123047
+            },
+            {
+                "label": "person",
+                "confidence": 0.9949449896812439
+            },
+            {
+                "label": "person",
+                "confidence": 0.9907659292221069
+            },
+            {
+                "label": "person",
+                "confidence": 0.9796862602233887
+            },
+            {
+                "label": "person",
+                "confidence": 0.9900158643722534
+            },
+            {
+                "label": "toothbrush",
+                "confidence": 0.33193886280059814
+            },
+            {
+                "label": "cell phone",
+                "confidence": 0.39465460181236267
+            },
+            {
+                "label": "cell phone",
+                "confidence": 0.9409392476081848
+            },
+            {
+                "label": "cell phone",
+                "confidence": 0.9867399334907532
+            },
+            {
+                "label": "person",
+                "confidence": 0.22798778116703033
+            },
+            {
+                "label": "cell phone",
+                "confidence": 0.6419764757156372
+            },
+            {
+                "label": "cell phone",
+                "confidence": 0.9920133948326111
+            },
+            {
+                "label": "cell phone",
+                "confidence": 0.9922904372215271
+            },
+            {
+                "label": "cell phone",
+                "confidence": 0.9969013333320618
+            },
+            {
+                "label": "cell phone",
+                "confidence": 0.9844789505004883
+            },
+            {
+                "label": "person",
+                "confidence": 0.3516203463077545
+            },
+            {
+                "label": "cell phone",
+                "confidence": 0.9986523985862732
+            },
+            {
+                "label": "person",
+                "confidence": 0.9918118715286255
+            },
+            {
+                "label": "person",
+                "confidence": 0.25931888818740845
+            },
+            {
+                "label": "cell phone",
+                "confidence": 0.9970666170120239
+            },
+            {
+                "label": "person",
+                "confidence": 0.9993628263473511
+            },
+            {
+                "label": "cell phone",
+                "confidence": 0.9620664119720459
+            },
+            {
+                "label": "person",
+                "confidence": 0.9966951012611389
+            }
+        ]
+    },
+    "output_6587436122129.mp4": {
+        "type": "video",
+        "timestamp": "2025-05-11 18:55:56",
+        "detections": [
+            {
+                "label": "laptop",
+                "confidence": 0.9811165928840637
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9792123436927795
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9818776845932007
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9752886295318604
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9812361001968384
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9800717234611511
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9881094694137573
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9899477362632751
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9945761561393738
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9939085245132446
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9966832995414734
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.994437038898468
+            },
+            {
+                "label": "chair",
+                "confidence": 0.31627440452575684
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9963701963424683
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.995755136013031
+            },
+            {
+                "label": "cell phone",
+                "confidence": 0.9784305095672607
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9828975200653076
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9475795030593872
+            },
+            {
+                "label": "chair",
+                "confidence": 0.5234678387641907
+            },
+            {
+                "label": "chair",
+                "confidence": 0.22669367492198944
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9558772444725037
+            },
+            {
+                "label": "chair",
+                "confidence": 0.4631236493587494
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9892357587814331
+            },
+            {
+                "label": "chair",
+                "confidence": 0.23441842198371887
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9965324401855469
+            },
+            {
+                "label": "cell phone",
+                "confidence": 0.8518036007881165
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9935799837112427
+            },
+            {
+                "label": "chair",
+                "confidence": 0.3722020387649536
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.998375415802002
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9987635016441345
+            },
+            {
+                "label": "umbrella",
+                "confidence": 0.33980274200439453
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9986974000930786
+            },
+            {
+                "label": "umbrella",
+                "confidence": 0.29515716433525085
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9971082806587219
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9979669451713562
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9973402619361877
+            },
+            {
+                "label": "cup",
+                "confidence": 0.44333353638648987
+            },
+            {
+                "label": "person",
+                "confidence": 0.4304075837135315
+            },
+            {
+                "label": "cup",
+                "confidence": 0.5968390107154846
+            },
+            {
+                "label": "person",
+                "confidence": 0.20544889569282532
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9980894923210144
+            },
+            {
+                "label": "cup",
+                "confidence": 0.7722673416137695
+            },
+            {
+                "label": "person",
+                "confidence": 0.2407037317752838
+            },
+            {
+                "label": "book",
+                "confidence": 0.22684916853904724
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9982361197471619
+            },
+            {
+                "label": "cup",
+                "confidence": 0.7320101857185364
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9977886080741882
+            },
+            {
+                "label": "cup",
+                "confidence": 0.6869425177574158
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.998927652835846
+            },
+            {
+                "label": "cup",
+                "confidence": 0.49844586849212646
+            },
+            {
+                "label": "cup",
+                "confidence": 0.8997007012367249
+            },
+            {
+                "label": "cup",
+                "confidence": 0.6158242225646973
+            },
+            {
+                "label": "cup",
+                "confidence": 0.897698163986206
+            },
+            {
+                "label": "book",
+                "confidence": 0.31270208954811096
+            },
+            {
+                "label": "cup",
+                "confidence": 0.7050248384475708
+            },
+            {
+                "label": "book",
+                "confidence": 0.37143146991729736
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9986268877983093
+            },
+            {
+                "label": "cup",
+                "confidence": 0.6337935328483582
+            },
+            {
+                "label": "book",
+                "confidence": 0.2142389416694641
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9985296130180359
+            },
+            {
+                "label": "cup",
+                "confidence": 0.4898911118507385
+            },
+            {
+                "label": "book",
+                "confidence": 0.3124760687351227
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9983019828796387
+            },
+            {
+                "label": "cup",
+                "confidence": 0.5160231590270996
+            },
+            {
+                "label": "cell phone",
+                "confidence": 0.44551369547843933
+            },
+            {
+                "label": "cup",
+                "confidence": 0.462691068649292
+            },
+            {
+                "label": "cell phone",
+                "confidence": 0.2169138789176941
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9976426959037781
+            },
+            {
+                "label": "cup",
+                "confidence": 0.5936201810836792
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9974084496498108
+            },
+            {
+                "label": "cup",
+                "confidence": 0.5327521562576294
+            },
+            {
+                "label": "book",
+                "confidence": 0.20924261212348938
+            },
+            {
+                "label": "cup",
+                "confidence": 0.8467420935630798
+            },
+            {
+                "label": "book",
+                "confidence": 0.2580258250236511
+            },
+            {
+                "label": "cup",
+                "confidence": 0.6793649792671204
+            },
+            {
+                "label": "book",
+                "confidence": 0.44625189900398254
+            },
+            {
+                "label": "cup",
+                "confidence": 0.8180636167526245
+            },
+            {
+                "label": "book",
+                "confidence": 0.2162042260169983
+            },
+            {
+                "label": "cup",
+                "confidence": 0.5548527240753174
+            },
+            {
+                "label": "book",
+                "confidence": 0.31522929668426514
+            },
+            {
+                "label": "cup",
+                "confidence": 0.2802450358867645
+            },
+            {
+                "label": "cup",
+                "confidence": 0.6444254517555237
+            },
+            {
+                "label": "cup",
+                "confidence": 0.5160960555076599
+            },
+            {
+                "label": "person",
+                "confidence": 0.2482546716928482
+            },
+            {
+                "label": "cup",
+                "confidence": 0.44482073187828064
+            },
+            {
+                "label": "cup",
+                "confidence": 0.2372603416442871
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9959253072738647
+            },
+            {
+                "label": "cell phone",
+                "confidence": 0.9689297676086426
+            },
+            {
+                "label": "cup",
+                "confidence": 0.33294984698295593
+            },
+            {
+                "label": "cup",
+                "confidence": 0.21692194044589996
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9977341294288635
+            },
+            {
+                "label": "cell phone",
+                "confidence": 0.9579533934593201
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.23009058833122253
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9495331048965454
+            },
+            {
+                "label": "cell phone",
+                "confidence": 0.7937687635421753
+            },
+            {
+                "label": "person",
+                "confidence": 0.38219478726387024
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.8133547306060791
+            },
+            {
+                "label": "person",
+                "confidence": 0.37029072642326355
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.8219026923179626
+            },
+            {
+                "label": "person",
+                "confidence": 0.6434719562530518
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.40997546911239624
+            },
+            {
+                "label": "person",
+                "confidence": 0.5343711972236633
+            },
+            {
+                "label": "person",
+                "confidence": 0.30031415820121765
+            },
+            {
+                "label": "tvmonitor",
+                "confidence": 0.24887776374816895
+            },
+            {
+                "label": "tvmonitor",
+                "confidence": 0.6383821964263916
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.4366174638271332
+            },
+            {
+                "label": "tvmonitor",
+                "confidence": 0.780811071395874
+            },
+            {
+                "label": "person",
+                "confidence": 0.6333369016647339
+            },
+            {
+                "label": "person",
+                "confidence": 0.94038987159729
+            },
+            {
+                "label": "tvmonitor",
+                "confidence": 0.6922175884246826
+            },
+            {
+                "label": "person",
+                "confidence": 0.9469725489616394
+            },
+            {
+                "label": "tvmonitor",
+                "confidence": 0.8955528140068054
+            },
+            {
+                "label": "tvmonitor",
+                "confidence": 0.9631873369216919
+            },
+            {
+                "label": "person",
+                "confidence": 0.9285233616828918
+            },
+            {
+                "label": "tvmonitor",
+                "confidence": 0.9653366804122925
+            },
+            {
+                "label": "person",
+                "confidence": 0.9384351372718811
+            },
+            {
+                "label": "person",
+                "confidence": 0.9417857527732849
+            },
+            {
+                "label": "tvmonitor",
+                "confidence": 0.9224758148193359
+            },
+            {
+                "label": "person",
+                "confidence": 0.9280871152877808
+            },
+            {
+                "label": "tvmonitor",
+                "confidence": 0.9009894132614136
+            },
+            {
+                "label": "tvmonitor",
+                "confidence": 0.9433969855308533
+            },
+            {
+                "label": "person",
+                "confidence": 0.9335362911224365
+            },
+            {
+                "label": "person",
+                "confidence": 0.9471513628959656
+            },
+            {
+                "label": "tvmonitor",
+                "confidence": 0.939004123210907
+            },
+            {
+                "label": "person",
+                "confidence": 0.9495658278465271
+            },
+            {
+                "label": "tvmonitor",
+                "confidence": 0.9158308506011963
+            },
+            {
+                "label": "tvmonitor",
+                "confidence": 0.9431723952293396
+            },
+            {
+                "label": "person",
+                "confidence": 0.9155014753341675
+            },
+            {
+                "label": "person",
+                "confidence": 0.9599189162254333
+            },
+            {
+                "label": "tvmonitor",
+                "confidence": 0.936448335647583
+            },
+            {
+                "label": "tvmonitor",
+                "confidence": 0.9658662676811218
+            },
+            {
+                "label": "person",
+                "confidence": 0.9148948192596436
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9500963091850281
+            },
+            {
+                "label": "person",
+                "confidence": 0.9069172739982605
+            },
+            {
+                "label": "bottle",
+                "confidence": 0.26162946224212646
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9347939491271973
+            },
+            {
+                "label": "person",
+                "confidence": 0.9130955934524536
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.2510632574558258
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9793254137039185
+            },
+            {
+                "label": "person",
+                "confidence": 0.8216007947921753
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.963036835193634
+            },
+            {
+                "label": "person",
+                "confidence": 0.9337643980979919
+            },
+            {
+                "label": "tvmonitor",
+                "confidence": 0.38772717118263245
+            },
+            {
+                "label": "person",
+                "confidence": 0.9274957180023193
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.8935545682907104
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.8358482122421265
+            },
+            {
+                "label": "person",
+                "confidence": 0.5537236332893372
+            },
+            {
+                "label": "chair",
+                "confidence": 0.33545011281967163
+            },
+            {
+                "label": "person",
+                "confidence": 0.9413423538208008
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9287198185920715
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.8924547433853149
+            },
+            {
+                "label": "person",
+                "confidence": 0.3572419583797455
+            },
+            {
+                "label": "chair",
+                "confidence": 0.33342432975769043
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9926654100418091
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.953119158744812
+            },
+            {
+                "label": "person",
+                "confidence": 0.7153509855270386
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.2297930121421814
+            },
+            {
+                "label": "mouse",
+                "confidence": 0.20428764820098877
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9885675311088562
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9644611477851868
+            },
+            {
+                "label": "chair",
+                "confidence": 0.5628437995910645
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.27468422055244446
+            },
+            {
+                "label": "diningtable",
+                "confidence": 0.25058621168136597
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.971115231513977
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9700679183006287
+            },
+            {
+                "label": "person",
+                "confidence": 0.9251430630683899
+            },
+            {
+                "label": "diningtable",
+                "confidence": 0.2895815074443817
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9825908541679382
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9581634998321533
+            },
+            {
+                "label": "sofa",
+                "confidence": 0.22110368311405182
+            },
+            {
+                "label": "person",
+                "confidence": 0.9722391366958618
+            },
+            {
+                "label": "person",
+                "confidence": 0.9289509057998657
+            },
+            {
+                "label": "chair",
+                "confidence": 0.28405967354774475
+            },
+            {
+                "label": "bottle",
+                "confidence": 0.24143584072589874
+            },
+            {
+                "label": "cup",
+                "confidence": 0.2374451458454132
+            },
+            {
+                "label": "diningtable",
+                "confidence": 0.2373407781124115
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9882909655570984
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9588146805763245
+            },
+            {
+                "label": "chair",
+                "confidence": 0.36272338032722473
+            },
+            {
+                "label": "chair",
+                "confidence": 0.2388349026441574
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9956192374229431
+            },
+            {
+                "label": "person",
+                "confidence": 0.939915120601654
+            },
+            {
+                "label": "chair",
+                "confidence": 0.7922375202178955
+            },
+            {
+                "label": "chair",
+                "confidence": 0.719887375831604
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.6313698291778564
+            },
+            {
+                "label": "chair",
+                "confidence": 0.589105486869812
+            },
+            {
+                "label": "bottle",
+                "confidence": 0.39317813515663147
+            },
+            {
+                "label": "cup",
+                "confidence": 0.2371167242527008
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.980598509311676
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9779872298240662
+            },
+            {
+                "label": "chair",
+                "confidence": 0.8310636281967163
+            },
+            {
+                "label": "bottle",
+                "confidence": 0.7160899639129639
+            },
+            {
+                "label": "chair",
+                "confidence": 0.7131980061531067
+            },
+            {
+                "label": "cup",
+                "confidence": 0.34329262375831604
+            },
+            {
+                "label": "chair",
+                "confidence": 0.22534562647342682
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9905174374580383
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.953174352645874
+            },
+            {
+                "label": "bottle",
+                "confidence": 0.7563002109527588
+            },
+            {
+                "label": "chair",
+                "confidence": 0.4290602505207062
+            },
+            {
+                "label": "chair",
+                "confidence": 0.3660837709903717
+            },
+            {
+                "label": "mouse",
+                "confidence": 0.2964125871658325
+            },
+            {
+                "label": "cup",
+                "confidence": 0.28730764985084534
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.994793176651001
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.947974443435669
+            },
+            {
+                "label": "chair",
+                "confidence": 0.8782892823219299
+            },
+            {
+                "label": "bottle",
+                "confidence": 0.7350738644599915
+            },
+            {
+                "label": "chair",
+                "confidence": 0.43238693475723267
+            },
+            {
+                "label": "cup",
+                "confidence": 0.39023515582084656
+            },
+            {
+                "label": "chair",
+                "confidence": 0.2908749282360077
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9850905537605286
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9583373665809631
+            },
+            {
+                "label": "chair",
+                "confidence": 0.9565865993499756
+            },
+            {
+                "label": "bottle",
+                "confidence": 0.918271541595459
+            },
+            {
+                "label": "chair",
+                "confidence": 0.6685826778411865
+            },
+            {
+                "label": "cup",
+                "confidence": 0.4900217652320862
+            },
+            {
+                "label": "diningtable",
+                "confidence": 0.288133442401886
+            },
+            {
+                "label": "mouse",
+                "confidence": 0.2239384949207306
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9942355155944824
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.96944260597229
+            },
+            {
+                "label": "chair",
+                "confidence": 0.9201226234436035
+            },
+            {
+                "label": "bottle",
+                "confidence": 0.9191645383834839
+            },
+            {
+                "label": "cup",
+                "confidence": 0.3730959892272949
+            },
+            {
+                "label": "chair",
+                "confidence": 0.332163006067276
+            },
+            {
+                "label": "mouse",
+                "confidence": 0.2414003312587738
+            },
+            {
+                "label": "chair",
+                "confidence": 0.2276345193386078
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.975994348526001
+            },
+            {
+                "label": "bottle",
+                "confidence": 0.966819703578949
+            },
+            {
+                "label": "chair",
+                "confidence": 0.9128462672233582
+            },
+            {
+                "label": "chair",
+                "confidence": 0.6470074653625488
+            },
+            {
+                "label": "cup",
+                "confidence": 0.432064414024353
+            },
+            {
+                "label": "mouse",
+                "confidence": 0.29055896401405334
+            },
+            {
+                "label": "chair",
+                "confidence": 0.2662115693092346
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9843902587890625
+            },
+            {
+                "label": "bottle",
+                "confidence": 0.9430848360061646
+            },
+            {
+                "label": "chair",
+                "confidence": 0.9204550385475159
+            },
+            {
+                "label": "cup",
+                "confidence": 0.7219887971878052
+            },
+            {
+                "label": "chair",
+                "confidence": 0.6693598031997681
+            },
+            {
+                "label": "chair",
+                "confidence": 0.42714443802833557
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9815390110015869
+            },
+            {
+                "label": "person",
+                "confidence": 0.9779648780822754
+            },
+            {
+                "label": "bottle",
+                "confidence": 0.9609872102737427
+            },
+            {
+                "label": "chair",
+                "confidence": 0.9476112723350525
+            },
+            {
+                "label": "chair",
+                "confidence": 0.6424864530563354
+            },
+            {
+                "label": "chair",
+                "confidence": 0.5513554811477661
+            },
+            {
+                "label": "cup",
+                "confidence": 0.532340407371521
+            },
+            {
+                "label": "mouse",
+                "confidence": 0.36581388115882874
+            },
+            {
+                "label": "person",
+                "confidence": 0.20045062899589539
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9703426361083984
+            },
+            {
+                "label": "bottle",
+                "confidence": 0.9652560353279114
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9595914483070374
+            },
+            {
+                "label": "chair",
+                "confidence": 0.8270248770713806
+            },
+            {
+                "label": "cup",
+                "confidence": 0.5604939460754395
+            },
+            {
+                "label": "chair",
+                "confidence": 0.5491945147514343
+            },
+            {
+                "label": "person",
+                "confidence": 0.2900436222553253
+            },
+            {
+                "label": "bottle",
+                "confidence": 0.957948625087738
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9551994204521179
+            },
+            {
+                "label": "chair",
+                "confidence": 0.9526639580726624
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9045329093933105
+            },
+            {
+                "label": "chair",
+                "confidence": 0.8708373308181763
+            },
+            {
+                "label": "cup",
+                "confidence": 0.6625099778175354
+            },
+            {
+                "label": "chair",
+                "confidence": 0.5071430802345276
+            },
+            {
+                "label": "chair",
+                "confidence": 0.2790659964084625
+            },
+            {
+                "label": "person",
+                "confidence": 0.9716594219207764
+            },
+            {
+                "label": "chair",
+                "confidence": 0.943680465221405
+            },
+            {
+                "label": "bottle",
+                "confidence": 0.9240977168083191
+            },
+            {
+                "label": "chair",
+                "confidence": 0.8964155912399292
+            },
+            {
+                "label": "cup",
+                "confidence": 0.7218128442764282
+            },
+            {
+                "label": "chair",
+                "confidence": 0.5572051405906677
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.4598544239997864
+            },
+            {
+                "label": "mouse",
+                "confidence": 0.35748255252838135
+            },
+            {
+                "label": "person",
+                "confidence": 0.9653417468070984
+            },
+            {
+                "label": "chair",
+                "confidence": 0.9439077973365784
+            },
+            {
+                "label": "chair",
+                "confidence": 0.9272677302360535
+            },
+            {
+                "label": "bottle",
+                "confidence": 0.8998582363128662
+            },
+            {
+                "label": "cup",
+                "confidence": 0.546059250831604
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.4283103048801422
+            },
+            {
+                "label": "chair",
+                "confidence": 0.24655941128730774
+            },
+            {
+                "label": "chair",
+                "confidence": 0.21870456635951996
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9702167510986328
+            },
+            {
+                "label": "chair",
+                "confidence": 0.9251375198364258
+            },
+            {
+                "label": "chair",
+                "confidence": 0.9214615821838379
+            },
+            {
+                "label": "bottle",
+                "confidence": 0.8947875499725342
+            },
+            {
+                "label": "chair",
+                "confidence": 0.6441267728805542
+            },
+            {
+                "label": "chair",
+                "confidence": 0.5837052464485168
+            },
+            {
+                "label": "cup",
+                "confidence": 0.4675219655036926
+            },
+            {
+                "label": "mouse",
+                "confidence": 0.2490619719028473
+            },
+            {
+                "label": "remote",
+                "confidence": 0.2288227081298828
+            },
+            {
+                "label": "chair",
+                "confidence": 0.8943403959274292
+            },
+            {
+                "label": "bottle",
+                "confidence": 0.6750043034553528
+            },
+            {
+                "label": "chair",
+                "confidence": 0.5847718715667725
+            },
+            {
+                "label": "chair",
+                "confidence": 0.3205934464931488
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9687446355819702
+            },
+            {
+                "label": "chair",
+                "confidence": 0.8293667435646057
+            },
+            {
+                "label": "chair",
+                "confidence": 0.5029152631759644
+            },
+            {
+                "label": "chair",
+                "confidence": 0.31481149792671204
+            },
+            {
+                "label": "chair",
+                "confidence": 0.23112422227859497
+            },
+            {
+                "label": "chair",
+                "confidence": 0.7211923003196716
+            },
+            {
+                "label": "person",
+                "confidence": 0.4625396132469177
+            },
+            {
+                "label": "chair",
+                "confidence": 0.6523531675338745
+            },
+            {
+                "label": "person",
+                "confidence": 0.5583581924438477
+            },
+            {
+                "label": "person",
+                "confidence": 0.8006417155265808
+            },
+            {
+                "label": "chair",
+                "confidence": 0.6330423951148987
+            },
+            {
+                "label": "chair",
+                "confidence": 0.2959927022457123
+            },
+            {
+                "label": "person",
+                "confidence": 0.2812095582485199
+            },
+            {
+                "label": "diningtable",
+                "confidence": 0.23764429986476898
+            },
+            {
+                "label": "microwave",
+                "confidence": 0.38697153329849243
+            },
+            {
+                "label": "chair",
+                "confidence": 0.25323426723480225
+            },
+            {
+                "label": "microwave",
+                "confidence": 0.20071065425872803
+            },
+            {
+                "label": "person",
+                "confidence": 0.3566473126411438
+            },
+            {
+                "label": "person",
+                "confidence": 0.3140536844730377
+            },
+            {
+                "label": "person",
+                "confidence": 0.6713489890098572
+            },
+            {
+                "label": "book",
+                "confidence": 0.36626651883125305
+            },
+            {
+                "label": "mouse",
+                "confidence": 0.30023232102394104
+            },
+            {
+                "label": "person",
+                "confidence": 0.25573691725730896
+            },
+            {
+                "label": "mouse",
+                "confidence": 0.9702680110931396
+            },
+            {
+                "label": "book",
+                "confidence": 0.6916294097900391
+            },
+            {
+                "label": "person",
+                "confidence": 0.6080061197280884
+            },
+            {
+                "label": "person",
+                "confidence": 0.44124048948287964
+            },
+            {
+                "label": "orange",
+                "confidence": 0.396683007478714
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.2315942347049713
+            },
+            {
+                "label": "mouse",
+                "confidence": 0.8065645694732666
+            },
+            {
+                "label": "person",
+                "confidence": 0.6971593499183655
+            },
+            {
+                "label": "person",
+                "confidence": 0.5938702821731567
+            },
+            {
+                "label": "book",
+                "confidence": 0.2056434452533722
+            },
+            {
+                "label": "person",
+                "confidence": 0.9254941940307617
+            },
+            {
+                "label": "person",
+                "confidence": 0.7494149208068848
+            },
+            {
+                "label": "mouse",
+                "confidence": 0.719542920589447
+            },
+            {
+                "label": "person",
+                "confidence": 0.2791260778903961
+            },
+            {
+                "label": "person",
+                "confidence": 0.9472938179969788
+            },
+            {
+                "label": "person",
+                "confidence": 0.7452216744422913
+            },
+            {
+                "label": "mouse",
+                "confidence": 0.2886788249015808
+            },
+            {
+                "label": "mouse",
+                "confidence": 0.24824024736881256
+            },
+            {
+                "label": "person",
+                "confidence": 0.9953388571739197
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.6409506797790527
+            },
+            {
+                "label": "person",
+                "confidence": 0.5970732569694519
+            },
+            {
+                "label": "person",
+                "confidence": 0.5100863575935364
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.2635534703731537
+            },
+            {
+                "label": "person",
+                "confidence": 0.9964766502380371
+            },
+            {
+                "label": "person",
+                "confidence": 0.5843726396560669
+            },
+            {
+                "label": "person",
+                "confidence": 0.3113897144794464
+            },
+            {
+                "label": "person",
+                "confidence": 0.22078146040439606
+            },
+            {
+                "label": "person",
+                "confidence": 0.9908673167228699
+            },
+            {
+                "label": "person",
+                "confidence": 0.7584276795387268
+            },
+            {
+                "label": "person",
+                "confidence": 0.45804765820503235
+            },
+            {
+                "label": "person",
+                "confidence": 0.9931912422180176
+            },
+            {
+                "label": "mouse",
+                "confidence": 0.29240158200263977
+            },
+            {
+                "label": "bowl",
+                "confidence": 0.20282919704914093
+            },
+            {
+                "label": "person",
+                "confidence": 0.991890549659729
+            },
+            {
+                "label": "person",
+                "confidence": 0.2725882828235626
+            },
+            {
+                "label": "person",
+                "confidence": 0.9981424808502197
+            },
+            {
+                "label": "person",
+                "confidence": 0.4082680344581604
+            },
+            {
+                "label": "cell phone",
+                "confidence": 0.3933144509792328
+            },
+            {
+                "label": "diningtable",
+                "confidence": 0.29714831709861755
+            },
+            {
+                "label": "person",
+                "confidence": 0.23497436940670013
+            },
+            {
+                "label": "person",
+                "confidence": 0.9984870553016663
+            },
+            {
+                "label": "cell phone",
+                "confidence": 0.8771241307258606
+            },
+            {
+                "label": "person",
+                "confidence": 0.4371877908706665
+            },
+            {
+                "label": "person",
+                "confidence": 0.9990028738975525
+            },
+            {
+                "label": "person",
+                "confidence": 0.5911245942115784
+            },
+            {
+                "label": "knife",
+                "confidence": 0.23547722399234772
+            },
+            {
+                "label": "person",
+                "confidence": 0.9942123889923096
+            },
+            {
+                "label": "person",
+                "confidence": 0.6741050481796265
+            },
+            {
+                "label": "knife",
+                "confidence": 0.2629704773426056
+            },
+            {
+                "label": "person",
+                "confidence": 0.9950100779533386
+            },
+            {
+                "label": "person",
+                "confidence": 0.27332183718681335
+            },
+            {
+                "label": "person",
+                "confidence": 0.9958208203315735
+            },
+            {
+                "label": "person",
+                "confidence": 0.3590030074119568
+            },
+            {
+                "label": "person",
+                "confidence": 0.26122575998306274
+            },
+            {
+                "label": "person",
+                "confidence": 0.9971569776535034
+            },
+            {
+                "label": "person",
+                "confidence": 0.9975229501724243
+            },
+            {
+                "label": "person",
+                "confidence": 0.4889385998249054
+            },
+            {
+                "label": "person",
+                "confidence": 0.9963117241859436
+            },
+            {
+                "label": "person",
+                "confidence": 0.9159220457077026
+            },
+            {
+                "label": "person",
+                "confidence": 0.9972543716430664
+            },
+            {
+                "label": "person",
+                "confidence": 0.9964032769203186
+            },
+            {
+                "label": "person",
+                "confidence": 0.9979108572006226
+            },
+            {
+                "label": "person",
+                "confidence": 0.9979559779167175
+            },
+            {
+                "label": "person",
+                "confidence": 0.2192768156528473
+            },
+            {
+                "label": "person",
+                "confidence": 0.9986999034881592
+            },
+            {
+                "label": "person",
+                "confidence": 0.9965806603431702
+            },
+            {
+                "label": "person",
+                "confidence": 0.42654022574424744
+            },
+            {
+                "label": "person",
+                "confidence": 0.9966652393341064
+            },
+            {
+                "label": "person",
+                "confidence": 0.5674651861190796
+            },
+            {
+                "label": "person",
+                "confidence": 0.995450496673584
+            },
+            {
+                "label": "person",
+                "confidence": 0.7179017663002014
+            },
+            {
+                "label": "person",
+                "confidence": 0.22425659000873566
+            },
+            {
+                "label": "person",
+                "confidence": 0.9930628538131714
+            },
+            {
+                "label": "person",
+                "confidence": 0.8768736720085144
+            },
+            {
+                "label": "person",
+                "confidence": 0.6514263153076172
+            },
+            {
+                "label": "person",
+                "confidence": 0.9950888752937317
+            },
+            {
+                "label": "person",
+                "confidence": 0.38567009568214417
+            },
+            {
+                "label": "person",
+                "confidence": 0.9960170984268188
+            },
+            {
+                "label": "chair",
+                "confidence": 0.841899037361145
+            },
+            {
+                "label": "person",
+                "confidence": 0.46302345395088196
+            },
+            {
+                "label": "chair",
+                "confidence": 0.5795426964759827
+            },
+            {
+                "label": "person",
+                "confidence": 0.3214792311191559
+            },
+            {
+                "label": "person",
+                "confidence": 0.9988268613815308
+            },
+            {
+                "label": "person",
+                "confidence": 0.5336426496505737
+            },
+            {
+                "label": "chair",
+                "confidence": 0.37471911311149597
+            },
+            {
+                "label": "person",
+                "confidence": 0.998349666595459
+            },
+            {
+                "label": "diningtable",
+                "confidence": 0.3465392291545868
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.2426101565361023
+            },
+            {
+                "label": "person",
+                "confidence": 0.9992870688438416
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.41529223322868347
+            },
+            {
+                "label": "chair",
+                "confidence": 0.36689692735671997
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.2385137975215912
+            },
+            {
+                "label": "cell phone",
+                "confidence": 0.5292742848396301
+            },
+            {
+                "label": "chair",
+                "confidence": 0.3776686489582062
+            },
+            {
+                "label": "person",
+                "confidence": 0.345119446516037
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.28591763973236084
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.27424153685569763
+            },
+            {
+                "label": "person",
+                "confidence": 0.9982353448867798
+            },
+            {
+                "label": "cell phone",
+                "confidence": 0.9117391109466553
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.6160520911216736
+            },
+            {
+                "label": "chair",
+                "confidence": 0.29522401094436646
+            },
+            {
+                "label": "cell phone",
+                "confidence": 0.22592665255069733
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.21670013666152954
+            },
+            {
+                "label": "mouse",
+                "confidence": 0.20845934748649597
+            },
+            {
+                "label": "person",
+                "confidence": 0.9901949763298035
+            },
+            {
+                "label": "cell phone",
+                "confidence": 0.7358165979385376
+            },
+            {
+                "label": "person",
+                "confidence": 0.4661342203617096
+            },
+            {
+                "label": "mouse",
+                "confidence": 0.44903162121772766
+            },
+            {
+                "label": "person",
+                "confidence": 0.979407548904419
+            },
+            {
+                "label": "person",
+                "confidence": 0.7543424963951111
+            },
+            {
+                "label": "person",
+                "confidence": 0.7149032354354858
+            },
+            {
+                "label": "person",
+                "confidence": 0.2748691737651825
+            },
+            {
+                "label": "person",
+                "confidence": 0.8246569037437439
+            },
+            {
+                "label": "sports ball",
+                "confidence": 0.4908897876739502
+            },
+            {
+                "label": "diningtable",
+                "confidence": 0.40369871258735657
+            },
+            {
+                "label": "sports ball",
+                "confidence": 0.287183940410614
+            },
+            {
+                "label": "cell phone",
+                "confidence": 0.4598158895969391
+            },
+            {
+                "label": "toothbrush",
+                "confidence": 0.4230828881263733
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.7646863460540771
+            },
+            {
+                "label": "cell phone",
+                "confidence": 0.44528114795684814
+            },
+            {
+                "label": "cell phone",
+                "confidence": 0.30460938811302185
+            },
+            {
+                "label": "mouse",
+                "confidence": 0.5175478458404541
+            },
+            {
+                "label": "cell phone",
+                "confidence": 0.43157529830932617
+            },
+            {
+                "label": "cell phone",
+                "confidence": 0.2419530600309372
+            },
+            {
+                "label": "cell phone",
+                "confidence": 0.464359849691391
+            },
+            {
+                "label": "cell phone",
+                "confidence": 0.2916431128978729
+            },
+            {
+                "label": "chair",
+                "confidence": 0.24383050203323364
+            },
+            {
+                "label": "cell phone",
+                "confidence": 0.20565500855445862
+            },
+            {
+                "label": "mouse",
+                "confidence": 0.3383403718471527
+            },
+            {
+                "label": "chair",
+                "confidence": 0.22778134047985077
+            },
+            {
+                "label": "cup",
+                "confidence": 0.34810614585876465
+            },
+            {
+                "label": "tvmonitor",
+                "confidence": 0.23667554557323456
+            },
+            {
+                "label": "mouse",
+                "confidence": 0.9204815030097961
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.3559750020503998
+            },
+            {
+                "label": "person",
+                "confidence": 0.2303859442472458
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.4299965798854828
+            },
+            {
+                "label": "mouse",
+                "confidence": 0.3184041380882263
+            },
+            {
+                "label": "mouse",
+                "confidence": 0.6274834275245667
+            },
+            {
+                "label": "person",
+                "confidence": 0.42231109738349915
+            },
+            {
+                "label": "microwave",
+                "confidence": 0.2684943675994873
+            },
+            {
+                "label": "person",
+                "confidence": 0.20509769022464752
+            },
+            {
+                "label": "person",
+                "confidence": 0.5668841004371643
+            },
+            {
+                "label": "person",
+                "confidence": 0.45269009470939636
+            },
+            {
+                "label": "person",
+                "confidence": 0.3474283218383789
+            },
+            {
+                "label": "oven",
+                "confidence": 0.3178098201751709
+            },
+            {
+                "label": "person",
+                "confidence": 0.7538903951644897
+            },
+            {
+                "label": "person",
+                "confidence": 0.6767376661300659
+            },
+            {
+                "label": "tvmonitor",
+                "confidence": 0.614433228969574
+            },
+            {
+                "label": "person",
+                "confidence": 0.2684090733528137
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.857989490032196
+            },
+            {
+                "label": "person",
+                "confidence": 0.7501024603843689
+            },
+            {
+                "label": "person",
+                "confidence": 0.4850146472454071
+            },
+            {
+                "label": "person",
+                "confidence": 0.3485885560512543
+            },
+            {
+                "label": "person",
+                "confidence": 0.9744899272918701
+            },
+            {
+                "label": "person",
+                "confidence": 0.8926026821136475
+            },
+            {
+                "label": "person",
+                "confidence": 0.7812696695327759
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9945176839828491
+            },
+            {
+                "label": "person",
+                "confidence": 0.9179761409759521
+            },
+            {
+                "label": "person",
+                "confidence": 0.9161344766616821
+            },
+            {
+                "label": "person",
+                "confidence": 0.8416886329650879
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9928064346313477
+            },
+            {
+                "label": "person",
+                "confidence": 0.9759849309921265
+            },
+            {
+                "label": "person",
+                "confidence": 0.9389756321907043
+            },
+            {
+                "label": "person",
+                "confidence": 0.7625585198402405
+            },
+            {
+                "label": "person",
+                "confidence": 0.9431599378585815
+            },
+            {
+                "label": "person",
+                "confidence": 0.9389005303382874
+            },
+            {
+                "label": "person",
+                "confidence": 0.7308027744293213
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9914302825927734
+            },
+            {
+                "label": "person",
+                "confidence": 0.9287663698196411
+            },
+            {
+                "label": "person",
+                "confidence": 0.7979432344436646
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9869914054870605
+            },
+            {
+                "label": "person",
+                "confidence": 0.9106174111366272
+            },
+            {
+                "label": "person",
+                "confidence": 0.7063510417938232
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9875543117523193
+            },
+            {
+                "label": "person",
+                "confidence": 0.865630030632019
+            },
+            {
+                "label": "person",
+                "confidence": 0.8588903546333313
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.995958685874939
+            },
+            {
+                "label": "person",
+                "confidence": 0.9819739460945129
+            },
+            {
+                "label": "person",
+                "confidence": 0.9663286209106445
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.994999885559082
+            },
+            {
+                "label": "person",
+                "confidence": 0.9883977174758911
+            },
+            {
+                "label": "person",
+                "confidence": 0.9428952932357788
+            },
+            {
+                "label": "person",
+                "confidence": 0.9694187641143799
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9932578206062317
+            },
+            {
+                "label": "person",
+                "confidence": 0.961340606212616
+            },
+            {
+                "label": "person",
+                "confidence": 0.9394783973693848
+            },
+            {
+                "label": "person",
+                "confidence": 0.9749881625175476
+            },
+            {
+                "label": "person",
+                "confidence": 0.9396291375160217
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9956987500190735
+            },
+            {
+                "label": "person",
+                "confidence": 0.9540082216262817
+            },
+            {
+                "label": "person",
+                "confidence": 0.9157027006149292
+            },
+            {
+                "label": "person",
+                "confidence": 0.9594300389289856
+            },
+            {
+                "label": "person",
+                "confidence": 0.921231746673584
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9967541694641113
+            },
+            {
+                "label": "person",
+                "confidence": 0.9421641826629639
+            },
+            {
+                "label": "person",
+                "confidence": 0.8742777705192566
+            },
+            {
+                "label": "laptop",
+                "confidence": 0.9970442056655884
+            },
+            {
+                "label": "person",
+                "confidence": 0.928307294845581
+            },
+            {
+                "label": "person",
+                "confidence": 0.8758251070976257
+            },
+            {
+                "label": "person",
+                "confidence": 0.9498834013938904
+            },
+            {
+                "label": "person",
+                "confidence": 0.9129308462142944
+            },
+            {
+                "label": "person",
+                "confidence": 0.9317829012870789
+            },
+            {
+                "label": "person",
+                "confidence": 0.9208341240882874
+            },
+            {
+                "label": "person",
+                "confidence": 0.9617761969566345
+            },
+            {
+                "label": "person",
+                "confidence": 0.9085769057273865
+            },
+            {
+                "label": "person",
+                "confidence": 0.9707669615745544
+            },
+            {
+                "label": "person",
+                "confidence": 0.9228025078773499
+            },
+            {
+                "label": "person",
+                "confidence": 0.9632019400596619
+            },
+            {
+                "label": "person",
+                "confidence": 0.9260573387145996
+            },
+            {
+                "label": "person",
+                "confidence": 0.9651030898094177
+            },
+            {
+                "label": "person",
+                "confidence": 0.9644716382026672
+            },
+            {
+                "label": "person",
+                "confidence": 0.9137234687805176
+            },
+            {
+                "label": "person",
+                "confidence": 0.9639620780944824
+            },
+            {
+                "label": "person",
+                "confidence": 0.9181764125823975
+            },
+            {
+                "label": "person",
+                "confidence": 0.9687740206718445
+            },
+            {
+                "label": "person",
+                "confidence": 0.9137888550758362
+            }
+        ]
+    },
+    "output_image3.jpg": {
+        "type": "image",
+        "timestamp": "2025-05-11 20:52:03",
+        "detections": [
+            {
+                "label": "airplane",
+                "confidence": 0.6575354337692261
+            },
+            {
+                "label": "person",
+                "confidence": 0.27255335450172424
+            }
+        ]
     }
 }
