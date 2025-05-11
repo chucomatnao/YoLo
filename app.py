@@ -8,6 +8,8 @@ import json
 from datetime import datetime
 from yolo import process_image
 from yolo_video import process_video
+import base64
+from io import BytesIO
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key'
@@ -62,7 +64,7 @@ def save_metadata(filename, file_type, detections):
     }
     with open(app.config['METADATA_FILE'], 'w') as f:
         json.dump(metadata, f, indent=4)
-    print(f"Metadata updated for {filename}: {metadata[filename]}")  # Debug
+    print(f"Metadata updated for {filename}: {metadata[filename]}")
 
 @app.route('/')
 def index():
@@ -131,13 +133,13 @@ def dashboard():
                     detections = process_video(filepath, output_path)
                     if not os.path.exists(output_path) or os.path.getsize(output_path) == 0:
                         raise ValueError("File video đầu ra không được tạo hoặc bị hỏng")
-                print(f"Stored detections: {detections}")  # Debug
+                print(f"Stored detections: {detections}")
                 session['detections'] = detections or []
                 session['file_type'] = 'image' if is_image else 'video'
                 save_metadata(output_filename, session['file_type'], detections)
                 return redirect(url_for('result', filename=output_filename))
             except Exception as e:
-                print(f"Error processing file: {str(e)}")  # Debug
+                print(f"Error processing file: {str(e)}")
                 flash(f'Lỗi khi xử lý file: {str(e)}', 'error')
                 return redirect(request.url)
         else:
@@ -171,18 +173,37 @@ def camera():
                     detections = process_video(filepath, output_path)
                     if not os.path.exists(output_path) or os.path.getsize(output_path) == 0:
                         raise ValueError("File video đầu ra không được tạo hoặc bị hỏng")
-                print(f"Stored detections: {detections}")  # Debug
+                print(f"Stored detections: {detections}")
                 session['detections'] = detections or []
                 session['file_type'] = 'image' if is_image else 'video'
                 save_metadata(output_filename, session['file_type'], detections)
                 return jsonify({'success': True, 'filename': output_filename})
             except Exception as e:
-                print(f"Error processing file: {str(e)}")  # Debug
+                print(f"Error processing file: {str(e)}")
                 return jsonify({'success': False, 'error': str(e)}), 500
         else:
             return jsonify({'success': False, 'error': 'Định dạng file không được hỗ trợ'}), 400
     return render_template('camera.html')
 
+@app.route('/process_frame', methods=['POST'])
+@login_required
+def process_frame():
+    try:
+        data = request.json
+        if not data or 'image' not in data:
+            return jsonify({'success': False, 'error': 'No image data provided'}), 400
+        # Decode base64 image
+        img_data = base64.b64decode(data['image'].split(',')[1])
+        img = cv2.imdecode(np.frombuffer(img_data, np.uint8), cv2.IMREAD_COLOR)
+        if img is None:
+            return jsonify({'success': False, 'error': 'Failed to decode image'}), 400
+        # Process image with YOLO
+        detections = process_image(img, None)  # Truyền mảng numpy, không lưu file
+        return jsonify({'success': True, 'detections': detections})
+    except Exception as e:
+        print(f"Error processing frame: {str(e)}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+    
 @app.route('/history')
 @login_required
 def history():
@@ -198,7 +219,7 @@ def history():
                 'detections': info.get('detections', [])
             })
     results.sort(key=lambda x: x.get('timestamp', ''), reverse=True)
-    print(f"History results: {results}")  # Debug
+    print(f"History results: {results}")
     return render_template('history.html', results=results)
 
 @app.route('/result/<filename>')
@@ -212,7 +233,7 @@ def result(filename):
         if filename in metadata:
             file_type = metadata[filename].get('type', 'image')
             detections = metadata[filename].get('detections', [])
-    print(f"Retrieved detections from metadata for {filename}: {detections}")  # Debug
+    print(f"Retrieved detections from metadata for {filename}: {detections}")
     return render_template('result.html', filename=filename, detections=detections, file_type=file_type)
 
 @app.route('/uploads/<file_type>/<filename>')

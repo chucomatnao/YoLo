@@ -1,85 +1,85 @@
-import numpy as np
-import cv2
+import sys
 import os
 
-def get_output_layers(net):
-    layer_names = net.getLayerNames()
-    return [layer_names[i - 1] for i in net.getUnconnectedOutLayers()]
+# Thêm đường dẫn đến thư mục yolov5 vào sys.path
+sys.path.append(os.path.join(os.path.dirname(__file__), 'yolov5'))
 
-def process_image(input_path, output_path, confidence=0.5, threshold=0.3):
-    # Kiểm tra đường dẫn file YOLO
-    labelsPath = os.path.sep.join(['yolo-coco', "coco.names"])
-    weightsPath = os.path.sep.join(['yolo-coco', "yolov3.weights"])
-    configPath = os.path.sep.join(['yolo-coco', "yolov3.cfg"])
+from yolov5.models.common import DetectMultiBackend
+from yolov5.utils.general import non_max_suppression
+from yolov5.utils.torch_utils import select_device
+import cv2
+import numpy as np
+import torch
 
-    for path in [labelsPath, weightsPath, configPath]:
-        if not os.path.exists(path):
-            raise FileNotFoundError(f"File không tồn tại: {path}")
+def load_yolo_model():
+    device = select_device('cpu')  # Sử dụng CPU, thay '0' nếu dùng GPU
+    model_path = os.path.join(os.path.dirname(__file__), 'yolov5', 'yolov5s.pt')  # Đường dẫn tuyệt đối
+    if not os.path.exists(model_path):
+        raise FileNotFoundError(f"Model file {model_path} not found. Please download yolov5s.pt and place it in the yolov5 directory.")
+    model = DetectMultiBackend(model_path, device=device, dnn=False)
+    model.eval()
+    return model
 
-    # Load COCO class labels
-    LABELS = open(labelsPath).read().strip().split("\n")
+# Load model một lần khi module được import
+model = load_yolo_model()
 
-    # Initialize colors
-    np.random.seed(42)
-    COLORS = np.random.randint(0, 255, size=(len(LABELS), 3), dtype="uint8")
+def process_image(image, output_path=None):
+    try:
+        # Kiểm tra xem image là đường dẫn (string) hay mảng numpy
+        if isinstance(image, str):
+            img = cv2.imread(image)
+            if img is None:
+                raise ValueError("Không thể đọc ảnh từ đường dẫn: " + image)
+        elif isinstance(image, np.ndarray):
+            img = image  # Sử dụng trực tiếp mảng numpy
+        else:
+            raise ValueError("Đầu vào không hợp lệ: image phải là đường dẫn (str) hoặc mảng numpy")
 
-    # Load YOLO
-    net = cv2.dnn.readNetFromDarknet(configPath, weightsPath)
+        if img is None:
+            raise ValueError("Ảnh không hợp lệ")
 
-    # Load image
-    image = cv2.imread(input_path)
-    if image is None:
-        print(f"Error: Cannot read image {input_path}")
+        # Chuẩn bị ảnh cho YOLO (chuyển sang RGB, resize)
+        img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        img_resized = cv2.resize(img_rgb, (640, 640))  # Kích thước mặc định của YOLOv5
+        img_tensor = np.transpose(img_resized, (2, 0, 1))  # CHW format
+        img_tensor = np.expand_dims(img_tensor, axis=0).astype(np.float32) / 255.0
+
+        # Chuyển sang định dạng PyTorch
+        img_tensor = torch.from_numpy(img_tensor).to(next(model.parameters()).device)
+
+        # Nhận diện với YOLO
+        with torch.no_grad():
+            pred = model(img_tensor)
+            pred = non_max_suppression(pred, conf_thres=0.25, iou_thres=0.45)[0]
+
+        # Chuyển đổi kết quả thành danh sách detections
+        detections = []
+        if pred is not None and len(pred):
+            for *xyxy, conf, cls in pred:
+                label = model.names[int(cls)]  # Tên lớp
+                confidence = conf.item()  # Độ tin cậy
+                detections.append({
+                    'label': label,
+                    'confidence': float(confidence)
+                })
+
+        # Nếu có output_path, lưu ảnh với bounding boxes
+        if output_path and detections:
+            for *xyxy, conf, cls in pred:
+                x1, y1, x2, y2 = map(int, xyxy)
+                cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
+                cv2.putText(img, f"{model.names[int(cls)]}: {conf:.2f}", (x1, y1 - 10),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+            cv2.imwrite(output_path, img)
+
+        print(f"Detections: {detections}")  # Log để debug
+        return detections
+    except Exception as e:
+        print(f"Error in process_image: {str(e)}")
         return []
-    (H, W) = image.shape[:2]
 
-    # Create blob and perform forward pass
-    blob = cv2.dnn.blobFromImage(image, 1 / 255.0, (416, 416), swapRB=True, crop=False)
-    net.setInput(blob)
-    layerOutputs = net.forward(get_output_layers(net))
-
-    # Initialize lists
-    boxes = []
-    confidences = []
-    classIDs = []
-
-    # Process detections
-    for output in layerOutputs:
-        for detection in output:
-            scores = detection[5:]
-            classID = np.argmax(scores)
-            conf = scores[classID]
-            if conf > confidence:
-                box = detection[0:4] * np.array([W, H, W, H])
-                (centerX, centerY, width, height) = box.astype("int")
-                x = int(centerX - (width / 2))
-                y = int(centerY - (height / 2))
-                boxes.append([x, y, int(width), int(height)])
-                confidences.append(float(conf))
-                classIDs.append(classID)
-
-    # Apply non-maxima suppression
-    idxs = cv2.dnn.NMSBoxes(boxes, confidences, confidence, threshold)
-
-    # Initialize detections list
-    detections = []
-
-    # Draw bounding boxes and collect detections
-    if len(idxs) > 0:
-        for i in idxs.flatten():
-            (x, y) = (boxes[i][0], boxes[i][1])
-            (w, h) = (boxes[i][2], boxes[i][3])
-            color = [int(c) for c in COLORS[classIDs[i]]]
-            cv2.rectangle(image, (x, y), (x + w, y + h), color, 2)
-            text = "{}: {:.4f}".format(LABELS[classIDs[i]], confidences[i])
-            cv2.putText(image, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
-            detections.append({"label": LABELS[classIDs[i]], "confidence": float(confidences[i])})
-            print(f"Image detected: {LABELS[classIDs[i]]}, Confidence: {confidences[i]}")
-
-    # Save output image
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    if not cv2.imwrite(output_path, image):
-        raise ValueError(f"Không thể lưu ảnh đầu ra: {output_path}")
-
-    print(f"Image saved to {output_path}, detections (count: {len(detections)}): {detections}")
-    return detections
+if __name__ == "__main__":
+    # Test hàm
+    img = cv2.imread("path/to/test/image.jpg")
+    detections = process_image(img, None)
+    print(detections)
