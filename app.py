@@ -6,8 +6,8 @@ import cv2
 import numpy as np
 import json
 from datetime import datetime
-from yolo import process_image
-from yolo_video import process_video
+from yolo import process_image, process_video
+from ultralytics import YOLO
 import base64
 from io import BytesIO
 
@@ -20,6 +20,9 @@ app.config['VIDEO_ORIGINAL'] = os.path.join(app.config['UPLOAD_FOLDER'], 'videos
 app.config['VIDEO_PROCESSED'] = os.path.join(app.config['UPLOAD_FOLDER'], 'videos/processed')
 app.config['METADATA_FILE'] = os.path.join(app.config['UPLOAD_FOLDER'], 'metadata.json')
 app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'mp4', 'avi', 'webm'}
+
+# Khởi tạo mô hình YOLO một lần
+model = YOLO("D:\\Nam3\\hocky2\\TGMT\\tgmt\\yolo_web_app\\yolov8n.pt")  # Thay bằng đường dẫn của bạn
 
 # Thiết lập Flask-Login
 login_manager = LoginManager()
@@ -214,6 +217,51 @@ def process_frame():
         print(f"Error processing frame: {str(e)}")
         return jsonify({'success': False, 'error': str(e)}), 500
 
+@app.route('/capture_image', methods=['POST'])
+@login_required
+def capture_image():
+    try:
+        data = request.json
+        if not data or 'image' not in data:
+            return jsonify({'success': False, 'error': 'No image data provided'}), 400
+
+        # Decode base64 image
+        img_data = base64.b64decode(data['image'].split(',')[1])
+        img = cv2.imdecode(np.frombuffer(img_data, np.uint8), cv2.IMREAD_COLOR)
+        if img is None:
+            return jsonify({'success': False, 'error': 'Failed to decode image'}), 400
+
+        # Tạo tên file ảnh duy nhất
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        output_filename = f"capture_{timestamp}.jpg"
+        output_path = os.path.join(app.config['IMAGE_PROCESSED'], output_filename)
+
+        # Process image with YOLO and save with bounding boxes
+        detections = process_image(img, output_path)
+
+        # Kiểm tra file ảnh đầu ra
+        if not os.path.exists(output_path):
+            return jsonify({'success': False, 'error': f'File ảnh đầu ra không được tạo: {output_path}'}), 500
+        if os.path.getsize(output_path) == 0:
+            return jsonify({'success': False, 'error': f'File ảnh đầu ra rỗng: {output_path}'}), 500
+
+        # Loại bỏ trùng lặp trong detections
+        unique_detections = []
+        seen = set()
+        for d in detections:
+            key = (d["label"], round(d["confidence"], 4))
+            if key not in seen:
+                unique_detections.append(d)
+                seen.add(key)
+
+        # Lưu vào metadata
+        save_metadata(output_filename, 'image', unique_detections)
+
+        return jsonify({'success': True, 'filename': output_filename})
+    except Exception as e:
+        print(f"Error capturing image: {str(e)}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
 @app.route('/save_camera_video', methods=['POST'])
 @login_required
 def save_camera_video():
@@ -243,6 +291,7 @@ def save_camera_video():
         fourcc = cv2.VideoWriter_fourcc(*"mp4v")
         writer = cv2.VideoWriter(output_path, fourcc, fps, (width, height), True)
 
+        # Xử lý từng khung hình với YOLO để vẽ bounding boxes
         for frame_data in frames:
             img_data = base64.b64decode(frame_data.split(',')[1])
             img = cv2.imdecode(np.frombuffer(img_data, np.uint8), cv2.IMREAD_COLOR)
@@ -250,7 +299,10 @@ def save_camera_video():
                 continue
             # Resize frame để đồng bộ kích thước
             img = cv2.resize(img, (width, height))
-            writer.write(img)
+            # Process frame with YOLO to get annotated image
+            results = model(img)  # Sử dụng mô hình đã khởi tạo
+            annotated_frame = results[0].plot()  # Vẽ bounding boxes
+            writer.write(annotated_frame)
 
         writer.release()
 
