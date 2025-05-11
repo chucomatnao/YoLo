@@ -1,224 +1,197 @@
 {% extends "base.html" %}
-{% block title %}Camera{% endblock %}
+{% block title %}Camera - Nhận Diện Trực Tiếp{% endblock %}
 {% block content %}
-<div class="max-w-4xl mx-auto p-6">
-    <h1 class="text-3xl font-bold mb-6">Camera</h1>
+<!-- Tích hợp Tailwind CSS qua CDN -->
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
-    <!-- Video stream và các nút chức năng -->
-    <div class="mb-6">
-        <video id="video" width="640" height="480" autoplay playsinline style="border: 2px solid #ccc;"></video>
-        <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
-        <div class="mt-4 flex space-x-4">
-            <button id="captureImage" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Chụp ảnh</button>
-            <button id="startVideo" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Quay video</button>
-            <button id="stopVideo" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700" disabled>Stop video</button>
-            <button id="liveDetect" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">Nhận diện trực tiếp</button>
+<div class="min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-5xl w-full bg-white rounded-xl shadow-2xl overflow-hidden">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-center py-6">
+            <h1 class="text-3xl font-extrabold tracking-tight">Nhận Diện Trực Tiếp Từ Camera</h1>
         </div>
-    </div>
 
-    <!-- Kết quả nhận diện trực tiếp -->
-    <div id="liveResults" class="mt-6 p-4 bg-gray-100 rounded shadow">
-        <h2 class="text-xl font-semibold mb-2">Kết quả nhận diện trực tiếp</h2>
-        <ul id="detectionList" class="space-y-2"></ul>
-    </div>
+        <!-- Nội dung chính -->
+        <div class="p-8 flex flex-col lg:flex-row gap-8">
+            <!-- Phần hiển thị video từ webcam -->
+            <div class="flex-[7] flex flex-col justify-center items-center">
+                <video id="video" autoplay class="w-full max-w-[640px] h-auto max-h-[480px] rounded-lg shadow-md border border-gray-200"></video>
+                <canvas id="canvas" class="hidden"></canvas>
+                <div class="mt-4 flex gap-4">
+                    <button id="startBtn" class="px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 transition-colors duration-200">
+                        Bắt Đầu Nhận Diện
+                    </button>
+                    <button id="stopBtn" class="px-6 py-3 bg-red-600 text-white font-semibold rounded-lg shadow-md hover:bg-red-700 transition-colors duration-200" disabled>
+                        Dừng Nhận Diện
+                    </button>
+                    <button id="saveBtn" class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-200" disabled>
+                        Lưu Vào Lịch Sử
+                    </button>
+                </div>
+            </div>
 
-    <!-- Hiển thị ảnh/video đã xử lý (nếu có) -->
-    <div id="processedMedia" class="mt-6" style="display: none;">
-        {% if processed_filename %}
-            {% if file_type == 'image' %}
-                <img src="{{ url_for('uploaded_file', file_type='image', filename=processed_filename) }}" alt="Processed Image" class="w-full max-w-[640px] h-auto">
-            {% else %}
-                <video controls class="w-full max-w-[640px] h-auto">
-                    <source src="{{ url_for('uploaded_file', file_type='video', filename=processed_filename) }}" type="video/mp4">
-                    Trình duyệt của bạn không hỗ trợ video.
-                </video>
-            {% endif %}
-        {% endif %}
+            <!-- Phần danh sách đối tượng -->
+            <div class="flex-[3]">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Các Đối Tượng Được Phát Hiện</h2>
+                <div id="detectionList" class="bg-gray-50 rounded-lg shadow-inner p-4"
+                     style="max-height: 480px; max-width: 100%; overflow-y: auto; overflow-x: hidden;">
+                    <p class="text-gray-500 italic">Chưa có đối tượng nào được phát hiện.</p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
 <script>
     const video = document.getElementById('video');
     const canvas = document.getElementById('canvas');
-    const context = canvas.getContext('2d');
-    const captureImage = document.getElementById('captureImage');
-    const startVideo = document.getElementById('startVideo');
-    const stopVideo = document.getElementById('stopVideo');
-    const liveDetect = document.getElementById('liveDetect');
+    const ctx = canvas.getContext('2d');
     const detectionList = document.getElementById('detectionList');
-    let stream;
-    let mediaRecorder;
-    let recordedChunks = [];
-    let isRecording = false;
-    let liveDetectionInterval = null;
+    const startBtn = document.getElementById('startBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const saveBtn = document.getElementById('saveBtn');
 
-    // Khởi tạo camera
-    function startCamera() {
-        navigator.mediaDevices.getUserMedia({ video: true })
-            .then(s => {
-                stream = s;
-                video.srcObject = stream;
-            })
-            .catch(err => {
-                console.error('Error accessing camera:', err);
-                alert('Không thể truy cập camera: ' + err.message);
-            });
+    let stream = null;
+    let processing = false;
+    let frames = []; // Lưu trữ các khung hình để ghi video
+    let intervalId = null;
+
+    // Khởi động webcam
+    async function startCamera() {
+        try {
+            stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            video.srcObject = stream;
+            video.play();
+            canvas.width = 640;
+            canvas.height = 480;
+        } catch (err) {
+            console.error("Error accessing webcam:", err);
+            alert("Không thể truy cập webcam: " + err.message);
+        }
     }
 
-    // Dừng camera
-    function stopCamera() {
+    // Bắt đầu nhận diện
+    startBtn.addEventListener('click', async () => {
+        if (!stream) {
+            await startCamera();
+        }
+        processing = true;
+        startBtn.disabled = true;
+        stopBtn.disabled = false;
+        saveBtn.disabled = true;
+        frames = []; // Reset frames
+
+        intervalId = setInterval(async () => {
+            if (!processing) return;
+
+            // Vẽ video lên canvas và lấy dữ liệu ảnh
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            const imageData = canvas.toDataURL('image/jpeg');
+
+            // Gửi khung hình để nhận diện
+            try {
+                const response = await fetch('/process_frame', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ image: imageData })
+                });
+                const result = await response.json();
+
+                if (result.success) {
+                    // Lưu khung hình
+                    frames.push(imageData);
+
+                    // Hiển thị kết quả nhận diện
+                    const detections = result.detections || [];
+                    if (detections.length > 0) {
+                        detectionList.innerHTML = '';
+                        detections.forEach(detection => {
+                            const li = document.createElement('li');
+                            li.className = 'flex justify-between items-center p-3 bg-white rounded-md shadow-sm hover:shadow-md transition-shadow duration-200';
+                            li.innerHTML = `
+                                <span class="text-gray-700 font-medium">${detection.label.charAt(0).toUpperCase() + detection.label.slice(1)}</span>
+                                <span class="text-gray-500">Độ tin cậy: ${detection.confidence.toFixed(4)}</span>
+                            `;
+                            detectionList.appendChild(li);
+                        });
+                    } else {
+                        detectionList.innerHTML = '<p class="text-gray-500 italic">Không có đối tượng nào được phát hiện.</p>';
+                    }
+                } else {
+                    console.error("Error processing frame:", result.error);
+                }
+            } catch (err) {
+                console.error("Error sending frame:", err);
+            }
+        }, 1000); // Gửi khung hình mỗi 1 giây
+    });
+
+    // Dừng nhận diện
+    stopBtn.addEventListener('click', () => {
+        processing = false;
+        clearInterval(intervalId);
+        startBtn.disabled = false;
+        stopBtn.disabled = true;
+        saveBtn.disabled = false;
+
         if (stream) {
             stream.getTracks().forEach(track => track.stop());
             stream = null;
             video.srcObject = null;
         }
+    });
+
+    // Lưu video và kết quả vào lịch sử
+    saveBtn.addEventListener('click', async () => {
+        if (frames.length === 0) {
+            alert("Không có khung hình nào để lưu!");
+            return;
+        }
+
+        try {
+            const response = await fetch('/save_camera_video', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ frames: frames })
+            });
+            const result = await response.json();
+
+            if (result.success) {
+                alert("Đã lưu video và kết quả vào lịch sử!");
+                // Chuyển hướng đến trang Result
+                window.location.href = `/result/${result.filename}`;
+            } else {
+                alert("Lỗi khi lưu video: " + result.error);
+            }
+        } catch (err) {
+            console.error("Error saving video:", err);
+            alert("Lỗi khi lưu video: " + err.message);
+        }
+    });
+
+    // Khởi động webcam khi tải trang
+    window.addEventListener('load', startCamera);
+</script>
+
+<style>
+    #detectionList {
+        height: 480px; /* Đồng bộ với max-height của video */
+        width: 100%; /* Điều chỉnh để phù hợp với phần 3/10 */
     }
 
-    // Khởi động camera khi tải trang
-    startCamera();
+    #video {
+        height: 480px; /* Đảm bảo chiều cao cố định */
+        width: 640px; /* Đảm bảo chiều rộng cố định */
+        object-fit: contain; /* Giữ tỷ lệ video */
+    }
 
-    // Chụp ảnh
-    captureImage.addEventListener('click', () => {
-        if (!stream) {
-            alert('Camera chưa sẵn sàng. Vui lòng thử lại.');
-            startCamera();
-            return;
+    @media (max-width: 1024px) {
+        #detectionList, #video {
+            max-width: 100%;
+            height: auto;
+            max-height: 400px; /* Giảm chiều cao trên màn hình nhỏ */
         }
-        context.drawImage(video, 0, 0, canvas.width, canvas.height);
-        canvas.toBlob(blob => {
-            const formData = new FormData();
-            formData.append('file', blob, 'capture.jpg');
-            fetch('/camera', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    window.location.href = `/result/${data.filename}`;
-                } else {
-                    alert(data.error);
-                }
-            })
-            .catch(err => {
-                console.error('Error:', err);
-                alert('Lỗi khi xử lý ảnh: ' + err.message);
-            });
-        }, 'image/jpeg');
-    });
+    }
+</style>
 
-    // Quay video
-    startVideo.addEventListener('click', () => {
-        if (!stream) {
-            alert('Camera chưa sẵn sàng. Vui lòng thử lại.');
-            startCamera();
-            return;
-        }
-        recordedChunks = [];
-        mediaRecorder = new MediaRecorder(stream);
-        mediaRecorder.ondataavailable = event => {
-            if (event.data.size > 0) {
-                recordedChunks.push(event.data);
-            }
-        };
-        mediaRecorder.onstop = () => {
-            const blob = new Blob(recordedChunks, { type: 'video/mp4' });
-            const formData = new FormData();
-            formData.append('file', blob, 'capture.mp4');
-            fetch('/camera', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    window.location.href = `/result/${data.filename}`;
-                } else {
-                    alert(data.error);
-                }
-            })
-            .catch(err => {
-                console.error('Error:', err);
-                alert('Lỗi khi xử lý video: ' + err.message);
-            });
-            recordedChunks = [];
-            isRecording = false;
-        };
-        mediaRecorder.start();
-        isRecording = true;
-        startVideo.disabled = true;
-        stopVideo.disabled = false;
-    });
-
-    stopVideo.addEventListener('click', () => {
-        if (mediaRecorder && isRecording) {
-            mediaRecorder.stop();
-            startVideo.disabled = false;
-            stopVideo.disabled = true;
-        }
-    });
-
-    // Nhận diện trực tiếp
-    liveDetect.addEventListener('click', () => {
-        if (!stream) {
-            alert('Camera chưa sẵn sàng. Vui lòng thử lại.');
-            startCamera();
-            return;
-        }
-        if (liveDetectionInterval) {
-            // Dừng nhận diện
-            clearInterval(liveDetectionInterval);
-            liveDetectionInterval = null;
-            detectionList.innerHTML = '<li>Nhận diện đã dừng.</li>';
-            liveDetect.textContent = 'Nhận diện trực tiếp';
-            return;
-        }
-        liveDetect.textContent = 'Dừng nhận diện';
-        liveDetectionInterval = setInterval(() => {
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
-            canvas.toBlob(blob => {
-                const reader = new FileReader();
-                reader.onloadend = () => {
-                    const base64String = reader.result;
-                    fetch('/process_frame', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ image: base64String })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        detectionList.innerHTML = ''; // Xóa kết quả cũ
-                        if (data.success) {
-                            const detections = data.detections;
-                            if (detections.length > 0) {
-                                detections.forEach(detection => {
-                                    const li = document.createElement('li');
-                                    li.textContent = `${detection.label}: Độ tin cậy: ${detection.confidence.toFixed(4)}`;
-                                    detectionList.appendChild(li);
-                                });
-                            } else {
-                                const li = document.createElement('li');
-                                li.textContent = 'Không có đối tượng nào được phát hiện.';
-                                detectionList.appendChild(li);
-                            }
-                        } else {
-                            const li = document.createElement('li');
-                            li.textContent = 'Lỗi: ' + data.error;
-                            detectionList.appendChild(li);
-                        }
-                    })
-                    .catch(err => {
-                        console.error('Error:', err);
-                        const li = document.createElement('li');
-                        li.textContent = 'Lỗi khi nhận diện: ' + err.message;
-                        detectionList.appendChild(li);
-                    });
-                };
-                reader.readAsDataURL(blob);
-            }, 'image/jpeg', 0.7); // Giảm chất lượng để tăng tốc
-        }, 2000); // Gửi khung hình mỗi 2 giây để giảm tải
-    });
-</script>
 {% endblock %}
