@@ -13,34 +13,44 @@
 
         <!-- Nội dung chính -->
         <div class="p-8 flex flex-col lg:flex-row gap-8">
-            <!-- Phần hiển thị ảnh/video -->
-            <div class="flex-1 flex justify-center items-center">
+            <!-- Phần hiển thị ảnh/video (chiếm 7 phần) -->
+            <div class="flex-[7] flex justify-center items-center">
                 {% if file_type == 'image' %}
                     <img src="{{ url_for('uploaded_file', file_type='image', filename=filename) }}"
                          alt="Processed Image"
                          class="w-full max-w-[640px] h-auto max-h-[480px] object-contain rounded-lg shadow-md border border-gray-200"
                          id="media-display">
+                {% elif file_type == 'video' %}
+                    {% if filename and url_for('uploaded_file', file_type='video', filename=filename) %}
+                        <video controls class="w-full max-w-[640px] h-auto max-h-[480px] rounded-lg shadow-md border border-gray-200"
+                               id="media-display">
+                            <source src="{{ url_for('uploaded_file', file_type='video', filename=filename) }}" type="video/mp4">
+                            Trình duyệt của bạn không hỗ trợ video hoặc file video không khả dụng.
+                        </video>
+                    {% else %}
+                        <div class="text-red-500 text-center p-4 bg-red-50 rounded-lg">
+                            <p>Không thể tải video. File có thể không tồn tại hoặc đã bị xóa.</p>
+                        </div>
+                    {% endif %}
                 {% else %}
-                    <video controls class="w-full max-w-[640px] h-auto max-h-[480px] rounded-lg shadow-md border border-gray-200"
-                           id="media-display">
-                        <source src="{{ url_for('uploaded_file', file_type='video', filename=filename) }}" type="video/mp4">
-                        Trình duyệt của bạn không hỗ trợ video.
-                    </video>
+                    <div class="text-yellow-500 text-center p-4 bg-yellow-50 rounded-lg">
+                        <p>Loại file không được hỗ trợ hoặc không xác định.</p>
+                    </div>
                 {% endif %}
             </div>
 
-            <!-- Phần danh sách đối tượng -->
-            <div class="flex-1">
+            <!-- Phần danh sách đối tượng (chiếm 3 phần) -->
+            <div class="flex-[3]">
                 <h2 class="text-2xl font-semibold text-gray-800 mb-4">Các Đối Tượng Được Phát Hiện (Tổng: {{ detections | length }})</h2>
                 {% if detections %}
                     <div class="bg-gray-50 rounded-lg shadow-inner p-4"
-                         style="max-height: 480px; max-width: 640px; overflow-y: auto; overflow-x: hidden;"
+                         style="max-height: 480px; max-width: 100%; overflow-y: auto; overflow-x: hidden;"
                          id="detection-container">
                         <ul class="space-y-3">
                             {% for detection in detections %}
                                 <li class="flex justify-between items-center p-3 bg-white rounded-md shadow-sm hover:shadow-md transition-shadow duration-200">
                                     <span class="text-gray-700 font-medium">{{ detection.label | capitalize }}</span>
-                                    <span class="text-gray-500">Độ tin cậy: {{ detection.confidence | round(4) }}</span>
+                                    <span class="text-gray-500">Thời gian: {{ timestamp }}</span>
                                 </li>
                             {% endfor %}
                         </ul>
@@ -68,7 +78,7 @@
 <style>
     #detection-container {
         height: 480px; /* Đồng bộ với max-height của media */
-        width: 640px; /* Đồng bộ với max-width của media */
+        width: 100%; /* Điều chỉnh để phù hợp với phần 3/10 */
     }
 
     #media-display {

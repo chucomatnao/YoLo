@@ -100,16 +100,23 @@ def process_video(input_path, output_path, confidence=0.2, threshold=0.1):
         if writer is None:
             fourcc = cv2.VideoWriter_fourcc(*"mp4v")
             os.makedirs(os.path.dirname(output_path), exist_ok=True)
-            writer = cv2.VideoWriter(output_path, fourcc, fps, (output_width, output_height))
+            writer = cv2.VideoWriter(output_path, fourcc, fps, (output_width, output_height), True)
             if not writer.isOpened():
                 raise ValueError(f"Không thể tạo file video đầu ra: {output_path}")
 
         # Write frame
         writer.write(frame)
+        print(f"Frame {frame_count}: Wrote frame to {output_path}")
 
     # Clean up
     writer.release()
     vs.release()
+
+    # Kiểm tra file video đầu ra
+    if not os.path.exists(output_path):
+        raise ValueError(f"File video đầu ra không được tạo: {output_path}")
+    if os.path.getsize(output_path) == 0:
+        raise ValueError(f"File video đầu ra rỗng: {output_path}")
 
     print(f"Total frames processed: {frame_count}")
     print(f"Raw detections (count: {len(detections)}): {detections}")
