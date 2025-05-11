@@ -18,9 +18,11 @@
                 {% if file_type == 'image' %}
                     <img src="{{ url_for('uploaded_file', file_type='image', filename=filename) }}"
                          alt="Processed Image"
-                         class="w-full max-w-[640px] h-auto max-h-[480px] object-contain rounded-lg shadow-md border border-gray-200">
+                         class="w-full max-w-[640px] h-auto max-h-[480px] object-contain rounded-lg shadow-md border border-gray-200"
+                         id="media-display">
                 {% else %}
-                    <video controls class="w-full max-w-[640px] h-auto max-h-[480px] rounded-lg shadow-md border border-gray-200">
+                    <video controls class="w-full max-w-[640px] h-auto max-h-[480px] rounded-lg shadow-md border border-gray-200"
+                           id="media-display">
                         <source src="{{ url_for('uploaded_file', file_type='video', filename=filename) }}" type="video/mp4">
                         Trình duyệt của bạn không hỗ trợ video.
                     </video>
@@ -31,7 +33,9 @@
             <div class="flex-1">
                 <h2 class="text-2xl font-semibold text-gray-800 mb-4">Các Đối Tượng Được Phát Hiện (Tổng: {{ detections | length }})</h2>
                 {% if detections %}
-                    <div class="bg-gray-50 rounded-lg p-4 shadow-inner">
+                    <div class="bg-gray-50 rounded-lg shadow-inner p-4"
+                         style="max-height: 480px; max-width: 640px; overflow-y: auto; overflow-x: hidden;"
+                         id="detection-container">
                         <ul class="space-y-3">
                             {% for detection in detections %}
                                 <li class="flex justify-between items-center p-3 bg-white rounded-md shadow-sm hover:shadow-md transition-shadow duration-200">
@@ -60,4 +64,26 @@
         </div>
     </div>
 </div>
+
+<style>
+    #detection-container {
+        height: 480px; /* Đồng bộ với max-height của media */
+        width: 640px; /* Đồng bộ với max-width của media */
+    }
+
+    #media-display {
+        height: 480px; /* Đảm bảo chiều cao cố định để đồng bộ */
+        width: 640px; /* Đảm bảo chiều rộng cố định */
+        object-fit: contain; /* Giữ tỷ lệ ảnh/video */
+    }
+
+    @media (max-width: 1024px) {
+        #detection-container, #media-display {
+            max-width: 100%;
+            height: auto;
+            max-height: 400px; /* Giảm chiều cao trên màn hình nhỏ */
+        }
+    }
+</style>
+
 {% endblock %}
