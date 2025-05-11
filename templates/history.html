@@ -1,46 +1,50 @@
 {% extends "base.html" %}
 {% block title %}Lịch Sử{% endblock %}
 {% block content %}
-<div class="bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto">
-    <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">Lịch Sử Xử Lý</h1>
-    <table class="w-full table-auto border-collapse">
-        <thead>
-            <tr class="bg-gray-200">
-                <th class="px-4 py-2">Tên File</th>
-                <th class="px-4 py-2">Loại</th>
-                <th class="px-4 py-2">Thời Gian</th>
-                <th class="px-4 py-2">Đối Tượng Phát Hiện</th>
-                <th class="px-4 py-2">Hành Động</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for result in results %}
-            <tr class="border-b">
-                <td class="px-4 py-2">{{ result.filename }}</td>
-                <td class="px-4 py-2">{{ result.type | capitalize }}</td>
-                <td class="px-4 py-2">{{ result.timestamp }}</td>
-                <td class="px-4 py-2">
-                    {% if result.detections %}
-                        <ul class="list-disc pl-5">
-                            {% for detection in result.detections %}
-                                <li>{{ detection.label }}: {{ detection.confidence | round(4) }}</li>
-                            {% endfor %}
-                        </ul>
-                    {% else %}
-                        Không có đối tượng được phát hiện
-                    {% endif %}
-                </td>
-                <td class="px-4 py-2">
-                    <a href="{{ url_for('result', filename=result.filename) }}"
-                       class="text-blue-600 hover:underline">Xem</a>
-                </td>
-            </tr>
-            {% else %}
-            <tr>
-                <td colspan="5" class="px-4 py-2 text-center">Chưa có kết quả nào</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<!-- Tích hợp Tailwind CSS qua CDN -->
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+<div class="min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-5xl w-full bg-white rounded-xl shadow-2xl overflow-hidden">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-center py-6">
+            <h1 class="text-3xl font-extrabold tracking-tight">History</h1>
+        </div>
+
+        <!-- Bảng lịch sử -->
+        <div class="p-8">
+            <div class="overflow-x-auto">
+                <table class="w-full table-auto border-collapse">
+                    <thead>
+                        <tr class="bg-gray-200 text-gray-700">
+                            <th class="px-6 py-3 text-left font-semibold">Tên File</th>
+                            <th class="px-6 py-3 text-left font-semibold">Loại</th>
+                            <th class="px-6 py-3 text-left font-semibold">Thời Gian</th>
+                            <th class="px-6 py-3 text-left font-semibold">Hành Động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for result in results %}
+                        <tr class="border-b hover:bg-gray-50 transition-colors duration-200">
+                            <td class="px-6 py-4 text-gray-800">{{ result.filename }}</td>
+                            <td class="px-6 py-4 text-gray-600">{{ result.type | capitalize }}</td>
+                            <td class="px-6 py-4 text-gray-600">{{ result.timestamp }}</td>
+                            <td class="px-6 py-4">
+                                <a href="{{ url_for('result', filename=result.filename) }}"
+                                   class="inline-flex items-center px-4 py-2 bg-blue-600 text-white font-medium rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-200">
+                                    Xem
+                                </a>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="4" class="px-6 py-4 text-center text-gray-500">Chưa có kết quả nào</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

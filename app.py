@@ -204,9 +204,15 @@ def history():
 @app.route('/result/<filename>')
 @login_required
 def result(filename):
-    detections = session.pop('detections', [])
-    file_type = session.pop('file_type', 'image')
-    print(f"Retrieved detections: {detections}")  # Debug
+    file_type = None
+    detections = []
+    if os.path.exists(app.config['METADATA_FILE']):
+        with open(app.config['METADATA_FILE'], 'r') as f:
+            metadata = json.load(f)
+        if filename in metadata:
+            file_type = metadata[filename].get('type', 'image')
+            detections = metadata[filename].get('detections', [])
+    print(f"Retrieved detections from metadata for {filename}: {detections}")  # Debug
     return render_template('result.html', filename=filename, detections=detections, file_type=file_type)
 
 @app.route('/uploads/<file_type>/<filename>')
